@@ -28,7 +28,7 @@ module.exports = [
         }
     },
     {
-        method: 'POST', path: '/selfies',
+        method: 'PUT', path: '/selfies',
         config: {
             handler: addSelfie,
             payload: {
@@ -71,7 +71,7 @@ function getSelfie(request, reply) {
   selfieProvider.findAll(function(error, selfies){
 
     var selfie = selfies.filter(function(p) {
-        return p.id === parseInt(request.params.id);
+        return p._id === request.params.id;
     }).pop();
 
     reply(selfie);
@@ -79,8 +79,8 @@ function getSelfie(request, reply) {
 }
 
 function addSelfie(request, reply) {
+  console.log("payload", payload);
   selfieProvider.findAll(function(error, selfies){
-   console.log("payload", payload);
     if (selfies.length == 0)
     {
         var selfie = {
