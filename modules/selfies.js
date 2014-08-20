@@ -18,7 +18,7 @@ module.exports = [
         config: { handler: getSelfie } 
     },
     {
-        method: 'POST', path: '/selfies/delete',
+        method: 'DELETE', path: '/selfies',
         config: {
             handler: delSelfie,
             payload: { parse: true },
@@ -102,10 +102,11 @@ function addSelfie(request, reply) {
 
 function delSelfie(request, reply) {
     delid = request.payload.id;
+
     selfieProvider.findAll(function(error, selfies){
 
         var selfie = selfies.filter(function(p) {
-            return p.id === parseInt(delid);
+            return p._id === delid;
         }).pop();
 
         selfieProvider.delete(selfie._id, function (argument) {
