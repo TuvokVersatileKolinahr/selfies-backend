@@ -26,11 +26,24 @@ DtoProvider.prototype.getCollection= function(callback) {
 };
 
 //find all greetings
+DtoProvider.prototype.findLastFive = function(callback) {
+  this.getCollection(function(error, dto_collection) {
+    if( error ) callback(error)
+      else {
+        dto_collection.find().sort({uploaded: -1}).limit(5).toArray(function(error, results) {
+          if( error ) callback(error)
+            else callback(null, results)
+          });
+      }
+    });
+};
+
+//find all greetings
 DtoProvider.prototype.findAll = function(callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
       else {
-        dto_collection.find().toArray(function(error, results) {
+        dto_collection.find().sort({uploaded: -1}).toArray(function(error, results) {
           if( error ) callback(error)
             else callback(null, results)
           });

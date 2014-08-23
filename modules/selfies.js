@@ -51,7 +51,7 @@ function getSelfies(request, reply) {
         reply(findSelfies(request.query.name));
     }
     else {
-      selfieProvider.findAll(function(error, items){
+      selfieProvider.findLastFive(function(error, items){
         reply(items);
       });
     }
