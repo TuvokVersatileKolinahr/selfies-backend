@@ -22,6 +22,6 @@
     "handlebars": "1.3.x",
     "mongodb": "1.3.6",
     "mongoose": "3.6.11",
-    "instagram-node-lib": "*"
+    "instagram-node": "*"
   }
 }

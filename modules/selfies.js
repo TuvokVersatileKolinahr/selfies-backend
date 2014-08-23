@@ -1,4 +1,4 @@
-var Instagram = require('instagram-node-lib');
+var ig = require('instagram-node').instagram();
 var Types = require('hapi').types;
 var DtoProvider = require('./dto/DtoProvider').DtoProvider;
 var selfieProvider= new DtoProvider('localhost', 27017, 'asok');
@@ -81,12 +81,26 @@ function getSelfie(request, reply) {
 }
 
 function addSelfie(request, reply) {
-  Instagram.set('client_id', 'f8f994c3d62746a3a9635e47e2730200');
-  Instagram.set('client_secret', 'ffb55fa5cd61469f905fbb8cdbfd373a');
+  ig.use({ client_id: 'f8f994c3d62746a3a9635e47e2730200',
+         client_secret: 'ffb55fa5cd61469f905fbb8cdbfd373a' });
 
-  ff = Instagram.tags.recent({ name: 'blue' });
-
-  console.log("ff", ff);
+  ig.tag_media_recent('selfie', function(err, medias, pagination, remaining, limit) {
+    var images = [];
+    for (var i = 0; i < medias.length; i++){
+      images.push(medias[i].images.standard_resolution.url);
+    }
+    var selfie = {
+      isActive: true,
+      picture: images[Math.floor(Math.random()*images.length)],
+      name: request.payload.name,
+      about: request.payload.about,
+      uploaded: new Date()
+    }
+    selfieProvider.save(selfie, function (argument) {
+      reply([{status:'ok',selfie:selfie}]);
+    });
+    
+  })
 }
 
 function delSelfie(request, reply) {
