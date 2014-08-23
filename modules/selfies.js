@@ -1,3 +1,4 @@
+var Instagram = require('instagram-node-lib');
 var Types = require('hapi').types;
 var DtoProvider = require('./dto/DtoProvider').DtoProvider;
 var selfieProvider= new DtoProvider('localhost', 27017, 'asok');
@@ -28,16 +29,17 @@ module.exports = [
         }
     },
     {
-        method: 'PUT', path: '/selfies',
+        method: 'POST', path: '/selfies',
         config: {
             handler: addSelfie,
             payload: {
-               maxBytes: 209715200,
-               output:'stream',
                parse: true
             },
             validate: {
-                payload: { name: Types.String().required().min(3) } 
+              payload: { 
+                name: Types.String().required(),
+                about: Types.String().required()
+              } 
             }
         }
     }
@@ -79,25 +81,12 @@ function getSelfie(request, reply) {
 }
 
 function addSelfie(request, reply) {
-  console.log("payload", payload);
-  selfieProvider.findAll(function(error, selfies){
-    if (selfies.length == 0)
-    {
-        var selfie = {
-            id: 1,
-            name: request.payload.name
-        };
-    } else {
-        var selfie = {
-            id: selfies[selfies.length - 1].id + 1,
-            name: request.payload.name
-        };
-    }
-    selfieProvider.save(selfie, function (argument) {
-        reply([{status:'ok',selfie:selfie}]);
-    });
+  Instagram.set('client_id', 'f8f994c3d62746a3a9635e47e2730200');
+  Instagram.set('client_secret', 'ffb55fa5cd61469f905fbb8cdbfd373a');
 
-  });
+  ff = Instagram.tags.recent({ name: 'blue' });
+
+  console.log("ff", ff);
 }
 
 function delSelfie(request, reply) {
