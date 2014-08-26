@@ -15,7 +15,13 @@ module.exports = [
         }
     },
     {
-        method: 'GET', path: '/selfies/{id}',
+        method: 'GET', path: '/selfies/{num}',
+        config: {
+            handler: getSelfies
+        }
+    },
+    {
+        method: 'GET', path: '/selfie/{id}',
         config: { handler: getSelfie } 
     },
     {
@@ -50,8 +56,13 @@ function getSelfies(request, reply) {
     if (request.query.name) {
         reply(findSelfies(request.query.name));
     }
+    else if (request.params.num) {
+      selfieProvider.findLastNum(request.params.num, function(error, items){
+        reply(items);
+      });
+    }
     else {
-      selfieProvider.findLastFive(function(error, items){
+      selfieProvider.findAll(function(error, items){
         reply(items);
       });
     }
