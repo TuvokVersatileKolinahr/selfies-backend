@@ -106,15 +106,8 @@ function addSelfie(request, reply) {
 function delSelfie(request, reply) {
     delid = request.payload.id;
 
-    selfieProvider.findAll(function(error, selfies){
-
-        var selfie = selfies.filter(function(p) {
-            return p._id === delid;
-        }).pop();
-
-        selfieProvider.delete(selfie._id, function (argument) {
-            reply([{status:'ok',selfie_id:delid}]);
-        });
+    selfieProvider.delete(delid, function (argument) {
+        reply([{status:'ok',selfie_id:delid}]);
     });
 
 }

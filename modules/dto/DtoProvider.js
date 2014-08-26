@@ -120,7 +120,7 @@ DtoProvider.prototype.delete = function(dtoId, callback) {
     if(error) callback(error);
     else {
       dto_collection.remove(
-        {_id: dtoId},
+        {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(dtoId)},
         function(error, dto){
           if(error) callback(error);
           else callback(null, dto)
