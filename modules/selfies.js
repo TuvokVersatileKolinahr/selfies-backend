@@ -44,7 +44,8 @@ module.exports = [
             validate: {
               payload: { 
                 name: Types.String().required(),
-                about: Types.String().required()
+                about: Types.String().required(),
+                pic: Types.String().required()
               } 
             }
         }
@@ -95,6 +96,7 @@ function addSelfie(request, reply) {
   ig.use({ client_id: 'f8f994c3d62746a3a9635e47e2730200',
          client_secret: 'ffb55fa5cd61469f905fbb8cdbfd373a' });
 
+  console.log("request.payload.pic", request.payload.pic);
   ig.tag_media_recent('selfie', function(err, medias, pagination, remaining, limit) {
     var images = [];
     for (var i = 0; i < medias.length; i++){
