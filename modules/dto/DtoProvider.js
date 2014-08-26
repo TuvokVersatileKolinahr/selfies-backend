@@ -30,7 +30,7 @@ DtoProvider.prototype.findLastFive = function(callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
       else {
-        dto_collection.find({isActive: true}).sort({uploaded: -1}).limit(8).toArray(function(error, results) {
+        dto_collection.find({isActive: true}).sort({uploaded: -1}).limit(9).toArray(function(error, results) {
           if( error ) callback(error)
             else callback(null, results)
           });
