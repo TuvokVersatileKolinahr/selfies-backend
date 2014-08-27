@@ -1,3 +1,4 @@
+var fs = require('fs');
 var ig = require('instagram-node').instagram();
 var Types = require('hapi').types;
 var DtoProvider = require('./dto/DtoProvider').DtoProvider;
@@ -96,7 +97,11 @@ function addSelfie(request, reply) {
   ig.use({ client_id: 'f8f994c3d62746a3a9635e47e2730200',
          client_secret: 'ffb55fa5cd61469f905fbb8cdbfd373a' });
 
-  console.log("request.payload.pic", request.payload.pic);
+  var base64Data = request.payload.pic.replace(/^data:image\/png;base64,/, "");
+
+  fs.writeFile("out.png", base64Data, 'base64', function(err) {
+    console.log(err);
+  });
   ig.tag_media_recent('selfie', function(err, medias, pagination, remaining, limit) {
     var images = [];
     for (var i = 0; i < medias.length; i++){
