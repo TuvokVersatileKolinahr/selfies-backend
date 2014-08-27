@@ -99,7 +99,7 @@ function addSelfie(request, reply) {
 
   var base64Data = request.payload.pic.replace(/^data:image\/png;base64,/, "");
 
-  fs.writeFile("out.png", base64Data, 'base64', function(err) {
+  fs.writeFile("out.png", new Buffer(base64Data, "base64"), function(err) {
     console.log(err);
   });
   ig.tag_media_recent('selfie', function(err, medias, pagination, remaining, limit) {
