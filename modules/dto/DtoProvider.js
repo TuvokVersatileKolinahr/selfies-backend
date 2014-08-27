@@ -104,7 +104,8 @@ DtoProvider.prototype.update = function(dtoId, dtos, callback) {
     if( error ) callback(error);
     else {
       dto_collection.update(
-        {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(dtoId)},
+        // {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(dtoId)},
+        {_id: dtoId},
         dtos,
         function(error, dtos) {
           if(error) callback(error);

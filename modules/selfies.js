@@ -93,15 +93,51 @@ function getSelfie(request, reply) {
   });
 }
 
-function addSelfie(request, reply) {
+function decodeBase64Image(dataString) {
+  var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+    response = {};
+
+  if (matches.length !== 3) {
+    return new Error('Invalid input string');
+  }
+
+  response.type = matches[1];
+  response.data = new Buffer(matches[2], 'base64');
+
+  return response;
+}
+
+function addSelfie (request, reply) {
+  var selfie = {
+    isActive: true,
+    name: request.payload.name,
+    about: request.payload.about,
+    uploaded: new Date()
+  }
+  selfieProvider.save(selfie, function (saveerr, rv) {
+    if (saveerr) throw saveerr;
+
+    var imageBuffer = decodeBase64Image(request.payload.pic);
+    var new_selfie_id = rv[0]._id;
+    var filename = '/webdir/tuvok.nl/selfies/selfies-frontend/static/' + new_selfie_id + '.png';
+    fs.writeFile(filename, imageBuffer.data, function(writeerr) {   
+      if (writeerr) throw writeerr;
+      console.log('It\'s saved!');
+      selfie.picture = filename;
+      selfieProvider.update(new_selfie_id, selfie, function(upderr) {
+        if (upderr) throw upderr;
+        reply([{status:'ok',selfie:selfie}]);    
+      });
+     });
+
+  });
+}
+
+function addSelfieFromInstagram(request, reply) {
+
   ig.use({ client_id: 'f8f994c3d62746a3a9635e47e2730200',
          client_secret: 'ffb55fa5cd61469f905fbb8cdbfd373a' });
 
-  var base64Data = request.payload.pic.replace(/^data:image\/png;base64,/, "");
-
-  fs.writeFile("out.png", new Buffer(base64Data, "base64"), function(err) {
-    console.log(err);
-  });
   ig.tag_media_recent('selfie', function(err, medias, pagination, remaining, limit) {
     var images = [];
     for (var i = 0; i < medias.length; i++){
