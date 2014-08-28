@@ -130,7 +130,7 @@ console.log('request', request);
   //    });
 
   // });
-  reply({status:'ok',statuscode:200,selfie:selfie});
+  reply({status:'ok',statuscode:200,data:selfie});
 }
 
 function addSelfieFromInstagram(request, reply) {
