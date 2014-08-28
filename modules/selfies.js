@@ -1,6 +1,6 @@
 var fs = require('fs');
+var Joi = require('joi');
 var ig = require('instagram-node').instagram();
-var Types = require('hapi').types;
 var DtoProvider = require('./dto/DtoProvider').DtoProvider;
 var selfieProvider= new DtoProvider('localhost', 27017, 'asok');
 selfieProvider.setCollectionName('selfies');
@@ -11,7 +11,7 @@ module.exports = [
         config: {
             handler: getSelfies, 
             validate: {
-                query: { name: Types.string() }
+                query: { name: Joi.string() }
             }
         }
     },
@@ -31,24 +31,18 @@ module.exports = [
             handler: delSelfie,
             payload: { parse: true },
             validate: {
-                payload: { id: Types.String().required() } 
+                payload: { id: Joi.string().required() } 
             }
         }
     },
     {
         method: 'POST', path: '/selfies',
         config: {
-            handler: addSelfie,
-            payload: {
-               parse: true
-            },
-            validate: {
-              payload: { 
-                name: Types.String().required(),
-                about: Types.String().required(),
-                pic: Types.String().required()
-              } 
-            }
+          handler: addSelfie,
+          payload:{
+                maxBytes:209715200,
+                parse: true
+          }
         }
     }
 ];
@@ -108,13 +102,16 @@ function decodeBase64Image(dataString) {
 }
 
 function addSelfie (request, reply) {
-  console.log('request', request);
+console.log('request', request);
+  // request.payload["name"].pipe(fs.createWriteStream("test"));
+
   var selfie = {
     isActive: true,
     name: request.payload.name,
     about: request.payload.about,
     uploaded: new Date()
   }
+  console.log('selfie', selfie);
   // selfieProvider.save(selfie, function (saveerr, rv) {
   //   if (saveerr) throw saveerr;
 
