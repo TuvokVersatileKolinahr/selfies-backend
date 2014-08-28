@@ -108,30 +108,32 @@ function decodeBase64Image(dataString) {
 }
 
 function addSelfie (request, reply) {
+  console.log('request', request);
   var selfie = {
     isActive: true,
     name: request.payload.name,
     about: request.payload.about,
     uploaded: new Date()
   }
-  selfieProvider.save(selfie, function (saveerr, rv) {
-    if (saveerr) throw saveerr;
+  // selfieProvider.save(selfie, function (saveerr, rv) {
+  //   if (saveerr) throw saveerr;
 
-    var imageBuffer = decodeBase64Image(request.payload.pic);
-    var new_selfie_id = rv[0]._id;
-    var filename = '/webdir/tuvok.nl/selfies/selfies-frontend/static/' + new_selfie_id + '.png';
-    fs.writeFile(filename, imageBuffer.data, function(writeerr) {   
-      if (writeerr) throw writeerr;
-      console.log('It\'s saved!');
-      selfie.picture = filename;
-      selfieProvider.update(new_selfie_id, selfie, function(upderr) {
-        if (upderr) throw upderr;
+  //   var imageBuffer = decodeBase64Image(request.payload.pic);
+  //   var new_selfie_id = rv[0]._id;
+  //   var filename = '/webdir/tuvok.nl/selfies/selfies-frontend/static/' + new_selfie_id + '.png';
+  //   fs.writeFile(filename, imageBuffer.data, function(writeerr) {   
+  //     if (writeerr) throw writeerr;
+  //     console.log('It\'s saved!');
+  //     selfie.picture = filename;
+  //     selfieProvider.update(new_selfie_id, selfie, function(upderr) {
+  //       if (upderr) throw upderr;
 
-        reply({status:'ok',statuscode:200,selfie:selfie});
-      });
-     });
+  //       reply({status:'ok',statuscode:200,selfie:selfie});
+  //     });
+  //    });
 
-  });
+  // });
+  reply({status:'ok',statuscode:200,selfie:selfie});
 }
 
 function addSelfieFromInstagram(request, reply) {
