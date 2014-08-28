@@ -126,7 +126,8 @@ function addSelfie (request, reply) {
       selfie.picture = filename;
       selfieProvider.update(new_selfie_id, selfie, function(upderr) {
         if (upderr) throw upderr;
-        reply([{status:'ok',selfie:selfie}]);    
+
+        reply({status:'ok',statuscode:200,selfie:selfie});
       });
      });
 
