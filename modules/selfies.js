@@ -154,7 +154,7 @@ function addSelfieFromInstagram(request, reply) {
       uploaded: new Date()
     }
     selfieProvider.save(selfie, function (argument) {
-      reply([{status:'ok',selfie:selfie}]);
+      reply([{status:'ok',data:selfie}]);
     });
     
   })
