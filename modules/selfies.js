@@ -4,6 +4,9 @@ var ig = require('instagram-node').instagram();
 var DtoProvider = require('./dto/DtoProvider').DtoProvider;
 var selfieProvider= new DtoProvider('localhost', 27017, 'asok');
 selfieProvider.setCollectionName('selfies');
+var base_dir = '/webdir/tuvok.nl/selfies/selfies-frontend/';
+var image_dir = 'static/';
+var base_uri = 'http://selfies.tuvok.nl/';
 
 module.exports = [
     {
@@ -39,9 +42,12 @@ module.exports = [
         method: 'POST', path: '/selfies',
         config: {
           handler: addSelfie,
-          payload:{
-                maxBytes:209715200,
-                parse: true
+          validate: {
+            payload: {
+              name: Joi.string().min(1).required(),
+              about: Joi.string().min(1).required(),
+              pic: Joi.binary().encoding('base64').max(10000).required()
+            }
           }
         }
     }
@@ -65,15 +71,11 @@ function getSelfies(request, reply) {
 }
 
 function findSelfies(name) {
-    /**
-    * can be more effective hoor, daar nie van
-    **/
-      selfieProvider.findAll(function(error, items){
-        return items.filter(function(selfie) {
-            return selfie.name.toLowerCase() === name.toLowerCase();
-        });
-      });
-
+  selfieProvider.findAll(function(error, items){
+    return items.filter(function(selfie) {
+        return selfie.name.toLowerCase() === name.toLowerCase();
+    });
+  });
 }
 
 function getSelfie(request, reply) {
@@ -87,50 +89,36 @@ function getSelfie(request, reply) {
   });
 }
 
-function decodeBase64Image(dataString) {
-  var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
-    response = {};
-
-  if (matches.length !== 3) {
-    return new Error('Invalid input string');
-  }
-
-  response.type = matches[1];
-  response.data = new Buffer(matches[2], 'base64');
-
-  return response;
-}
-
 function addSelfie (request, reply) {
-console.log('request', request);
-  // request.payload["name"].pipe(fs.createWriteStream("test"));
-
   var selfie = {
     isActive: true,
     name: request.payload.name,
     about: request.payload.about,
     uploaded: new Date()
   }
-  console.log('selfie', selfie);
-  // selfieProvider.save(selfie, function (saveerr, rv) {
-  //   if (saveerr) throw saveerr;
 
-  //   var imageBuffer = decodeBase64Image(request.payload.pic);
-  //   var new_selfie_id = rv[0]._id;
-  //   var filename = '/webdir/tuvok.nl/selfies/selfies-frontend/static/' + new_selfie_id + '.png';
-  //   fs.writeFile(filename, imageBuffer.data, function(writeerr) {   
-  //     if (writeerr) throw writeerr;
-  //     console.log('It\'s saved!');
-  //     selfie.picture = filename;
-  //     selfieProvider.update(new_selfie_id, selfie, function(upderr) {
-  //       if (upderr) throw upderr;
+  selfieProvider.save(selfie, function (save_error, rv) {
+    if (save_error) throw save_error;
+    var new_selfie_id = rv[0]._id;
+    var file_name_ext = new_selfie_id + '.png'
+    var filename = base_dir + image_dir + file_name_ext;
 
-  //       reply({status:'ok',statuscode:200,selfie:selfie});
-  //     });
-  //    });
+    if (request.payload.pic) {
+        var f = request.payload.pic;
+        console.log('f', f);
+        fs.writeFile(filename, f, function(write_error) {
+          if (write_error) throw write_error;
 
-  // });
-  reply({status:'ok',statuscode:200,data:selfie});
+          selfie.picture = base_uri + image_dir + file_name_ext;
+          console.log('Saved ', selfie);
+          selfieProvider.update(new_selfie_id, selfie, function(update_error) {
+            if (update_error) throw update_error;
+
+            reply({status:'ok',statuscode:200,selfie:selfie});
+          });
+        });
+    }
+  });
 }
 
 function addSelfieFromInstagram(request, reply) {
