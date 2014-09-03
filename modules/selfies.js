@@ -42,16 +42,11 @@ module.exports = [
         method: 'POST', path: '/selfies',
         config: {
           handler: addSelfie,
-          payload:{
-                maxBytes: 209715200,
-                output:'stream',
-                parse: true
-          }, 
           validate: {
             payload: {
               name: Joi.string().min(1).required(),
               about: Joi.string().min(1).required(),
-              pic: Joi.binary().encoding('base64').max(10000000).required()
+              pic: Joi.binary().encoding('base64').required()
             }
           }
         }
@@ -110,16 +105,15 @@ function addSelfie (request, reply) {
 
     if (request.payload.pic) {
         var f = request.payload.pic;
-        // console.log('f', f);
         fs.writeFile(filename, f, function(write_error) {
           if (write_error) throw write_error;
 
           selfie.picture = base_uri + image_dir + file_name_ext;
-          console.log('Saved ', selfie);
+
           selfieProvider.update(new_selfie_id, selfie, function(update_error) {
             if (update_error) throw update_error;
 
-            reply({status:'ok',statuscode:200,selfie:selfie});
+            reply({status:'ok',statuscode:200,data:selfie});
           });
         });
     }
