@@ -28,16 +28,18 @@ module.exports = [
         method: 'GET', path: '/selfie/{id}',
         config: { handler: getSelfie } 
     },
-    {
-        method: 'DELETE', path: '/selfies',
-        config: {
-            handler: delSelfie,
-            payload: { parse: true },
-            validate: {
-                payload: { id: Joi.string().required() } 
-            }
-        }
-    },
+    // Disabled the delete method since it is not used
+    // Github issue 'Disable the DELETE method #1'
+    // {
+    //     method: 'DELETE', path: '/selfies',
+    //     config: {
+    //         handler: delSelfie,
+    //         payload: { parse: true },
+    //         validate: {
+    //             payload: { id: Joi.string().required() } 
+    //         }
+    //     }
+    // },
     {
         method: 'POST', path: '/selfies',
         config: {
