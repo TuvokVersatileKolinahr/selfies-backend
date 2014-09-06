@@ -8,8 +8,8 @@ var base_dir = '/webdir/tuvok.nl/selfies/selfies-frontend/';
 var image_dir = 'static/';
 var base_uri = 'http://selfies.tuvok.nl/';
 
-module.exports = 
-[
+module.exports = {
+routes: [
   {
     method: 'GET', path: '/selfies',
     config: {
@@ -42,7 +42,7 @@ module.exports =
       }
     }
   }
-];
+]};
 
 function getSelfies(request, reply) {
   if (request.query.name) {

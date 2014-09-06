@@ -1,5 +1,6 @@
-var Hapi = require('hapi');
-var selfies = require('./modules/selfies');
+var Hapi = require('hapi'),
+    nconf = require('nconf'),
+    selfies = require('./modules/selfies');
 
 // Server config
 var config = { cors: true };
@@ -7,7 +8,7 @@ var config = { cors: true };
 var server = new Hapi.Server('localhost', 6523, config);
 
 // Add the route
-server.route(selfies);
+server.route(selfies.routes);
 
 // Start the server
 server.start();
