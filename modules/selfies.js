@@ -7,11 +7,15 @@ var selfieProvider, base_dir, image_dir, base_uri;
 
 module.exports = {
   init: function(config) {
+    console.log("config", config);
     this.selfieProvider = new DtoProvider(config.mongo.host, config.mongo.port, config.mongo.db);
-    selfieProvider.setCollectionName(config.mongo.collection);
+    this.selfieProvider.setCollectionName(config.mongo.collection);
     this.base_dir = config.env.base_dir;
     this.image_dir = config.env.image_dir;
     this.base_uri = config.env.base_uri;
+  },
+  getRoutes: function () {
+    return this.routes;
   },
   routes: [
     {
@@ -53,19 +57,19 @@ function getSelfies(request, reply) {
     reply(findSelfies(request.query.name));
   }
   else if (request.params.num) {
-    selfieProvider.findLastNum(request.params.num, function(error, items){
+    this.selfieProvider.findLastNum(request.params.num, function(error, items){
       reply(items);
     });
   }
   else {
-    selfieProvider.findAll(function(error, items){
+    this.selfieProvider.findAll(function(error, items){
       reply(items);
     });
   }
 }
 
 function findSelfies(name) {
-  selfieProvider.findAll(function(error, items){
+  this.selfieProvider.findAll(function(error, items){
     return items.filter(function(selfie) {
       return selfie.name.toLowerCase() === name.toLowerCase();
     });
