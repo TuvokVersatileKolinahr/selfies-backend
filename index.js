@@ -7,7 +7,7 @@ var config = { cors: true };
 var server = new Hapi.Server('localhost', 6523, config);
 
 // Add the route
-server.route(selfies);
+server.route(selfies.routes);
 
 // Start the server
 server.start();

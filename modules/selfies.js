@@ -2,47 +2,51 @@ var fs = require('fs');
 var Joi = require('joi');
 var ig = require('instagram-node').instagram();
 var DtoProvider = require('./dto/DtoProvider').DtoProvider;
-var selfieProvider= new DtoProvider('localhost', 27017, 'asok');
-selfieProvider.setCollectionName('selfies');
-var base_dir = '/webdir/tuvok.nl/selfies/selfies-frontend/';
-var image_dir = 'static/';
-var base_uri = 'http://selfies.tuvok.nl/';
 
-module.exports = 
-[
-  {
-    method: 'GET', path: '/selfies',
-    config: {
-      handler: getSelfies, 
-      validate: {
-        query: { name: Joi.string() }
-      }
-    }
+var selfieProvider, base_dir, image_dir, base_uri;
+
+module.exports = {
+  init: function(config) {
+    this.selfieProvider = new DtoProvider(config.mongo.host, config.mongo.port, config.mongo.db);
+    selfieProvider.setCollectionName(config.mongo.collection);
+    this.base_dir = config.env.base_dir;
+    this.image_dir = config.env.image_dir;
+    this.base_uri = config.env.base_uri;
   },
-  {
-    method: 'GET', path: '/selfies/{num}',
-    config: {
-      handler: getSelfies
-    }
-  },
-  {
-    method: 'GET', path: '/selfie/{id}',
-    config: { handler: getSelfie } 
-  },
-  {
-    method: 'POST', path: '/selfies',
-    config: {
-      handler: addSelfie,
-      validate: {
-        payload: {
-          name: Joi.string().min(1).required(),
-          about: Joi.string().min(1).required(),
-          pic: Joi.binary().encoding('base64').required()
+  routes: [
+    {
+      method: 'GET', path: '/selfies',
+      config: {
+        handler: getSelfies, 
+        validate: {
+          query: { name: Joi.string() }
         }
       }
-    }
-  }
-];
+    },
+    {
+      method: 'GET', path: '/selfies/{num}',
+      config: {
+        handler: getSelfies
+      }
+    },
+    {
+      method: 'GET', path: '/selfie/{id}',
+      config: { handler: getSelfie } 
+    },
+    {
+      method: 'POST', path: '/selfies',
+      config: {
+        handler: addSelfie,
+        validate: {
+          payload: {
+            name: Joi.string().min(1).required(),
+            about: Joi.string().min(1).required(),
+            pic: Joi.binary().encoding('base64').required()
+          }
+        }
+      }
+    }]
+};
 
 function getSelfies(request, reply) {
   if (request.query.name) {
