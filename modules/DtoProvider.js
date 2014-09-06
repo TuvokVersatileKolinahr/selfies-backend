@@ -4,9 +4,10 @@ var Server = require('mongodb').Server;
 var BSON = require('mongodb').BSON;
 var ObjectID = require('mongodb').ObjectID;
 
-DtoProvider = function(host, port, dbname) {
-  this.db= new Db(dbname, new Server(host, port, {}), {safe: true});
+DtoProvider = function(config) {
+  this.db = new Db(config.db, new Server(config.host, config.port, {}), {safe: true});
   this.db.open(function(){});
+  this.setCollectionName(config.collection);
 };
 
 DtoProvider.prototype.setCollectionName= function (collectionName) {
@@ -25,7 +26,7 @@ DtoProvider.prototype.getCollection= function(callback) {
   });
 };
 
-//find all greetings
+//find num dto's sorted by upload date
 DtoProvider.prototype.findLastNum = function(num, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
@@ -38,7 +39,7 @@ DtoProvider.prototype.findLastNum = function(num, callback) {
     });
 };
 
-//find all greetings
+//find all dto's sorted by upload date
 DtoProvider.prototype.findAll = function(callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
@@ -51,7 +52,7 @@ DtoProvider.prototype.findAll = function(callback) {
     });
 };
 
-//find an dto by ID
+//find a dto by ID
 DtoProvider.prototype.findById = function(id, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
@@ -85,7 +86,7 @@ DtoProvider.prototype.save = function(dtos, callback) {
     });
 };
 
-//find an dto by ID
+//find a dto by ID
 DtoProvider.prototype.findById = function(id, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
@@ -98,13 +99,12 @@ DtoProvider.prototype.findById = function(id, callback) {
     });
 };
 
-// update an dto
+// update a dto
 DtoProvider.prototype.update = function(dtoId, dtos, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error);
     else {
       dto_collection.update(
-        // {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(dtoId)},
         {_id: dtoId},
         dtos,
         function(error, dtos) {

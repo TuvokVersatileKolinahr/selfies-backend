@@ -1,49 +1,52 @@
-var fs = require('fs');
-var Joi = require('joi');
-var ig = require('instagram-node').instagram();
-var DtoProvider = require('./dto/DtoProvider').DtoProvider;
-var selfieProvider= new DtoProvider('localhost', 27017, 'asok');
-selfieProvider.setCollectionName('selfies');
-var base_dir = '/webdir/tuvok.nl/selfies/selfies-frontend/';
-var image_dir = 'static/';
-var base_uri = 'http://selfies.tuvok.nl/';
+var fs = require('fs'),
+    Joi = require('joi'),
+    ig = require('instagram-node').instagram(),
+    DtoProvider = require('./DtoProvider').DtoProvider,
+    nconf = require('nconf')
+     .argv() //override the environment variables and the json file with command line options
+     .env() //override the json file with environment variables
+     .file({ file: './config/config.json' }); //set defaults
+
+var config = nconf.get(),
+    selfieProvider= new DtoProvider(config.mongo);
+    selfieProvider.setCollectionName(config.mongo.collection);
 
 module.exports = {
-routes: [
-  {
-    method: 'GET', path: '/selfies',
-    config: {
-      handler: getSelfies, 
-      validate: {
-        query: { name: Joi.string() }
+  routes: [
+    {
+      method: 'GET', path: '/selfies',
+      config: {
+        handler: getSelfies, 
+        validate: {
+          query: { name: Joi.string() }
+        }
       }
-    }
-  },
-  {
-    method: 'GET', path: '/selfies/{num}',
-    config: {
-      handler: getSelfies
-    }
-  },
-  {
-    method: 'GET', path: '/selfie/{id}',
-    config: { handler: getSelfie } 
-  },
-  {
-    method: 'POST', path: '/selfies',
-    config: {
-      handler: addSelfie,
-      validate: {
-        payload: {
-          name: Joi.string().min(1).required(),
-          about: Joi.string().min(1).required(),
-          pic: Joi.binary().encoding('base64').required()
+    },
+    {
+      method: 'GET', path: '/selfies/{num}',
+      config: {
+        handler: getSelfies
+      }
+    },
+    {
+      method: 'GET', path: '/selfie/{id}',
+      config: { handler: getSelfie } 
+    },
+    {
+      method: 'POST', path: '/selfies',
+      config: {
+        handler: addSelfie,
+        validate: {
+          payload: {
+            name: Joi.string().min(1).required(),
+            about: Joi.string().min(1).required(),
+            pic: Joi.binary().encoding('base64').required()
+          }
         }
       }
     }
-  }
-]};
-
+  ]};
+ 
 function getSelfies(request, reply) {
   if (request.query.name) {
     reply(findSelfies(request.query.name));
@@ -91,14 +94,14 @@ function addSelfie (request, reply) {
     if (save_error) throw save_error;
     var new_selfie_id = rv[0]._id;
     var file_name_ext = new_selfie_id + '.png'
-    var filename = base_dir + image_dir + file_name_ext;
+    var filename = config.selfies.base_dir + config.selfies.image_dir + file_name_ext;
 
     if (request.payload.pic) {
       var f = request.payload.pic;
       fs.writeFile(filename, f, function(write_error) {
         if (write_error) throw write_error;
 
-        selfie.picture = base_uri + image_dir + file_name_ext;
+        selfie.picture = config.selfies.base_uri + config.selfies.image_dir + file_name_ext;
 
         selfieProvider.update(new_selfie_id, selfie, function(update_error) {
           if (update_error) throw update_error;
@@ -112,10 +115,9 @@ function addSelfie (request, reply) {
 
 function addSelfieFromInstagram(request, reply) {
 
-  ig.use({ client_id: 'f8f994c3d62746a3a9635e47e2730200',
-   client_secret: 'ffb55fa5cd61469f905fbb8cdbfd373a' });
+  ig.use(config.instagram.client);
 
-  ig.tag_media_recent('selfie', function(err, medias, pagination, remaining, limit) {
+  ig.tag_media_recent(config.instagram.tag, function(err, medias, pagination, remaining, limit) {
     var images = [];
     for (var i = 0; i < medias.length; i++){
       images.push(medias[i].images.standard_resolution.url);
