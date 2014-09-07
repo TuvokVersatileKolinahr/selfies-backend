@@ -8,8 +8,18 @@ var Hapi = require('hapi'),
 // Create a server with a host and port and config
 var server = new Hapi.Server(nconf.get('server:host'), nconf.get('server:port'), nconf.get('server:config'));
 
+// prevent the server from starting when we’re testing it
+if (!module.parent) {
+  server.start(function() {
+    console.log("Server started", server.info.uri);
+  });
+}
+
 // Add the route
 server.route(selfies.routes);
 
 // Start the server
 server.start();
+
+// Provide other modules (like tests) a handle to the server object
+module.exports = server;
