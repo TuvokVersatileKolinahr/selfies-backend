@@ -2,17 +2,17 @@
   "mongo": {
     "host": "localhost",
     "port": 27017,
-    "db": "asok",
+    "db": "selfieservice",
     "collection": "selfies"
   },
   "selfies": {
-    "base_dir": "/webdir/tuvok.nl/selfies/selfies-frontend/",
+    "base_dir": "/path/to/selfies-frontend/",
     "image_dir": "static/",
-    "base_uri": "http://selfies.tuvok.nl/",
+    "base_uri": "http://selfies.example.com/",
     "instagram": {
       "client": {
-        "client_id": "f8f994c3d62746a3a9635e47e2730200",
-        "client_secret": "ffb55fa5cd61469f905fbb8cdbfd373a"
+        "client_id": "[my-instagram-client_id]",
+        "client_secret": "[my-instagram-client_secret]"
       },
       "tag": "selfie"
     }
