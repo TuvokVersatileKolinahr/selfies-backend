@@ -34,3 +34,5 @@ Right now the following API endpoints are defined:
 	    about: String > 1
 	    pic:   Base64 encoded binary
  
+### Testing ###
+Testing the API can be done using `npm test` in the main repo directory. 
