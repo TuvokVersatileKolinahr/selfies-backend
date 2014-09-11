@@ -1,23 +1,17 @@
 {
   "name": "selfies-backend",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The selfies backend retrieves images from a webapp",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "./node_modules/lab/bin/lab -I DtoProvider"
+    "test": "mocha",
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/TuvokVersatileKolinahr/selfies-backend.git"
   },
-  "keywords": [
-    "selfies",
-    "webcam",
-    "social",
-    "responding",
-    "hapi",
-    "mongo"
-  ],
+  "keywords": ["selfies", "webcam", "social", "responding", "express", "mongodb"],
   "author": "Wouter Roosendaal",
   "license": "MIT",
   "bugs": {
@@ -25,13 +19,20 @@
   },
   "homepage": "https://github.com/TuvokVersatileKolinahr/selfies-backend",
   "dependencies": {
-    "hapi": "^6.7.1",
+    "express": "~4.9.0",
+    "body-parser": "~1.8.1",
+    "cookie-parser": "~1.3.3",
+    "morgan": "~1.3.0",
+    "serve-favicon": "~2.1.3",
+    "debug": "~2.0.0",
+    "hjs": "~0.0.6",
     "instagram-node": "^0.5.1",
-    "joi": "^4.6.2",
-    "mongodb": "^1.4.9",
-    "nconf": "^0.6.9"
+    "mongoose": "3.6.x"
   },
   "devDependencies": {
-    "lab": "^4.3.0"
+    "mocha": "1.11.0",
+    "supertest": "0.7.0",
+    "dimsum": "^0.1.8",
+    "should": "^4.0.4"
   }
 }

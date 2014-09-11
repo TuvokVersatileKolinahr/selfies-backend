@@ -1,35 +1,37 @@
-var Lab = require("lab"),
-  server = require("../");
-var lab = exports.lab = Lab.script();
 
-lab.experiment("When querying the selfies api", function() {
-  lab.before(function (done) {
 
-    // Wait 10 milliseconds
-    setTimeout(function () { done(); }, 10);
-  });
 
-  lab.beforeEach(function (done) {
-    // Run before every single test
-    done();
-  });
-
-  lab.test("the main endpoint lists all selfies in a normal frontend call", function(done) {
-    var num = 16,
-      options = {
-        method: "GET",
-        url: "/selfies/" + num
-      };
-
-    server.inject(options, function(response) {
-      var result = response.result;
-
-      Lab.expect(response.statusCode).to.equal(200);
-      Lab.expect(result).to.be.instanceof(Object);
-      Lab.expect(result).to.have.length(num);
-   
-      done();
-    });
-  });
-
-});
+var routes: [
+    {
+      method: 'GET', path: '/selfies',
+      config: {
+        handler: getSelfies, 
+        validate: {
+          query: { name: Joi.string() }
+        }
+      }
+    },
+    {
+      method: 'GET', path: '/selfies/{num}',
+      config: {
+        handler: getSelfies
+      }
+    },
+    {
+      method: 'GET', path: '/selfie/{id}',
+      config: { handler: getSelfie } 
+    },
+    {
+      method: 'POST', path: '/selfies',
+      config: {
+        handler: addSelfie,
+        validate: {
+          payload: {
+            name: Joi.string().min(1).required(),
+            about: Joi.string().min(1).required(),
+            pic: Joi.binary().encoding('base64').required()
+          }
+        }
+      }
+    }
+  ];

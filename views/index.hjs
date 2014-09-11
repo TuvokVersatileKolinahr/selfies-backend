@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>Something unexpected occurred</title>
+    <link rel='stylesheet' href='/stylesheets/pss.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body class="pss_body">
+
+    <div class="pss_content">
+
+    <div class="pss-error-page">
+    <h1>Something unexpected occurred!</h1>
+    <p>Due to an unexpected situation, we cannot complete your request. Please try again.</p>
+    <p>In case this problem persists, please contact your system administrator and provide the following error ID:</p>
+    <p>{{ title }}</p>
+    <p class="pss-error-code">edd3be6d-a9c6-49ed-8797-a52cb261b680:148645c509a</p>
+    <hr>
+    <p class="copyright"><span>Copyright 2014 - Planon B.V.</span></p>
+    <img id="bug">
+    </div>
+
+    </div>
+
+  </body>
+</html>

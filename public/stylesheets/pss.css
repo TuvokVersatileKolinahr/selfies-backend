@@ -1,0 +1,2053 @@
+/*
+*************************************
+*************************************
+**                                 **
+** PSS2 Styling table of contents: **
+**                                 **
+*************************************
+*************************************
+
+1 Global element styling
+
+2 Case part styling
+  2.1 Sub Casepart styling
+
+3 Page/Group styling
+
+4 Block styling
+   4.1  Message block
+   4.2  Search block
+   4.3  Details block
+   4.4  Upload block
+   4.5  List block
+   4.6  List block (table)
+   4.7  Generic Info Block
+   4.8  Row Expander
+   4.9  List block (field set table)
+   4.10 List block (single column)
+   4.11 Edit block
+   4.12 Add block
+   4.13 Wrapper block
+   4.14 Text block
+
+5 FieldGroup styling
+
+6 Field styling
+   6.1 Text area field
+   6.2 Expandable field
+   6.3 Date/time field
+   6.4 Boolean field
+   6.5 Reference field
+   6.6 Reference field dropdown
+   6.7 Image field
+   6.8 URL field
+   6.9 Field errors
+   6.10 Field info
+   6.11 Question fields
+   6.12 Filter Toggle
+   6.13 Others
+
+7 Dialog styling
+
+8 Action/Button styling
+   8.1 Save button
+   8.2 Disabled button
+
+9 Module "Selector" specific styling
+   9.1 Selector Info block
+   9.2 Selector Info block with image
+   9.3 Selector Info block errors
+   9.4 Selector editors
+  
+10 Wicket internal error page
+
+11 List cases page
+
+12 Wicket components
+   12.1 Wicket feedback panel
+   12.2 Busy indicator
+   12.3 Autocomplete styling
+   12.4 Dialog & Overlay
+  
+13 Generic classes
+
+14 Print style sheet
+
+15 Portal style sheet
+  15.1 Gadget
+  15.2 Modal
+  15.3 Icon list
+*/
+/*-------------------------------------*/
+/*---- 1 Global element styling -------*/
+/*-------------------------------------*/
+@font-face {
+    font-family: "Open Sans Light";
+    src: url("/static/fonts/open-sans-light/OpenSans-Light-webfont.eot#iefix") format("embedded-opentype"),
+         url("/static/fonts/open-sans-light/OpenSans-Light-webfont.woff") format("woff"),
+         url("/static/fonts/open-sans-light/OpenSans-Light-webfont.ttf") format("truetype"),
+         url("/static/fonts/open-sans-light/OpenSans-Light-webfont.svg#open_sanslight") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Open Sans Semibold";
+    src: url("/static/fonts/open-sans-semibold/OpenSans-Semibold-webfont.eot#iefix") format("embedded-opentype"),
+         url("/static/fonts/open-sans-semibold/OpenSans-Semibold-webfont.woff") format("woff"),
+         url("/static/fonts/open-sans-semibold/OpenSans-Semibold-webfont.ttf") format("truetype"),
+         url("/static/fonts/open-sans-semibold/OpenSans-Semibold-webfont.svg#open_sanssemibold") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+  font-family: "Open Sans Regular";
+  src:   url("/static/fonts/open-sans-regular/OpenSans-Regular-webfont.eot?#iefix") format('embedded-opentype'),
+      url("/static/fonts/open-sans-regular/OpenSans-Regular-webfont.woff") format("woff"), 
+         url("/static/fonts/open-sans-regular/OpenSans-Regular-webfont.svg") format("svg"); 
+         font-weight: normal;
+      font-style: normal;
+}
+* {
+  margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background-color: #ffffff;
+  line-height: 18px;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-width: 300px;
+  padding: 0 20px;
+  height: 246px;
+}
+
+body, input, textarea, select {
+  color: #3f4751;  
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+select{
+  border: 1px solid #CECECE;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  height: 21px;
+    line-height: 21px;
+    padding: 2px 4px;
+}
+a {
+  color: #006699;
+    text-decoration: underline;
+}
+a img {
+  border: none;
+}
+.pss_content {
+  background: #F2F2F2;
+  border-radius: 4px;
+  box-shadow: 0 0px 4px rgba(0,0,0,.3);
+  margin: 20px auto 20px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+.pss_logout {
+  border-radius: 16px;
+   display: block;
+   float: right;
+  height: 32px;
+  margin: -16px;
+  padding: 1px;
+    text-indent: -99999px;
+    transition: all 0.75s ease 0s;
+  width: 32px;
+}
+.pss_logout:hover{
+     -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+       -o-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+}
+.pss_logout a{
+  background: transparent url(img/logout.png) no-repeat center center;
+  border-radius: 16px;
+  display: block;
+  height: 101%;
+  width: 101%;
+}
+/* placeholders - NOTE: cannot be combined to 1 entry */
+::-webkit-input-placeholder {
+  color: #999;
+  font-style: italic;
+}
+:-moz-placeholder {
+  color: #999;
+  font-style: italic;
+}
+:-ms-input-placeholder {
+  color: #999;
+  font-style: italic;
+}
+/*----------------------------------*/
+/*------ 2 Case part styling -------*/
+/*----------------------------------*/
+.pss_casepart_header {
+  display: none;
+}
+
+/*----------------------------------*/
+/*----2.1 Sub Casepart styling -----*/
+/*----------------------------------*/
+.subcasepart .pss_page_header{
+  box-shadow: none;
+  background: transparent;
+  margin-bottom: 0;
+}
+.subcasepart .pss_page_header .pss_caption{
+  color: #1464a1;
+    font-family: "Open Sans Regular";
+    font-size: 15px;
+    margin: 0px;
+}
+.subcasepart .pss_messages_block{
+  margin-left:0;
+}
+
+/*----------------------------------*/
+/*----- 3 Page/Group styling -------*/
+/*----------------------------------*/
+  .pss_page_header {
+    background: #FFF url(img/PSSicon.png) no-repeat 15px center;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+  }
+  .pss_page_header.busy{
+    background-image: url(img/busy.gif);
+  }
+  body > .busy{
+    background: transparent url(img/busy.gif) no-repeat center center;
+    height: 24px;
+    left: 0;
+    position: fixed;
+    top:0;
+    width: 24px;
+    z-index: 9999;
+  }
+    .pss_page_header .pss_caption {
+      color: #3F4751;
+      font-family: 'Open Sans Semibold';
+        font-size: 16px;
+      height: 40px;
+      line-height: 40px;
+      margin: 0 0 0 53px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;  
+    }
+  .pss_breadcrumb{
+    color: #3f4751;
+    line-height: 1.4;
+    padding: 0 24px 10px;
+  }
+  .pss_breadcrumb_separator{
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  .pss_helptext{
+    border: 1px solid #DADADA;
+      border-radius: 3px;
+    color: #3f4751;
+    line-height: 1.4;
+    position: relative;
+    white-space: pre-wrap;
+  }
+  .pss_helptext:before {
+      border-color: #DADADA rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+      border-style: solid;
+      border-width: 11px;
+      bottom: -21px;
+      content: " ";
+      display: block;
+      height: 0;
+      left: 49px;
+      position: absolute;
+      width: 0;
+  }
+  .pss_helptext:after {
+      border-color: #FFFFFF rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+      border-style: solid;
+      border-width: 10px;
+      bottom: -18px;
+      content: " ";
+      display: block;
+      height: 0;
+      left: 50px;
+      position: absolute;
+      width: 0;
+  }
+  .pss_page_helptext{
+    background: #FFF url(img/helptext.png) no-repeat 15px center;
+    margin: 15px 53px 35px;
+      padding: 18px 18px 18px 64px;
+  }
+ 
+/*----------------------------------*/
+/*-------- 4 Block styling ---------*/
+/*----------------------------------*/
+
+.pss_block{
+  padding: 0 53px;
+}
+.pss_block_header {
+  display: none;
+}
+
+  /*---------- 4.1 Message block ---------*/
+  .pss_messages_block {
+    background-color: #FFF;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    border: 1px solid #DADADA;
+      border-radius: 3px;
+      color: #3F4751;
+      font-family: "Open Sans Regular";
+      font-size: 13px;
+      margin: 15px 53px 35px;
+      padding: 18px 18px 18px 59px;
+      position: relative;
+   }
+   .pss_messages_block:before {
+      border-color: #DADADA rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+      border-style: solid;
+      border-width: 11px;
+      bottom: -21px;
+      content: " ";
+      display: block;
+      height: 0;
+      left: 49px;
+      position: absolute;
+      width: 0;
+  }
+  .pss_messages_block:after {
+      border-color: #FFFFFF rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+      border-style: solid;
+      border-width: 10px;
+      bottom: -18px;
+      content: " ";
+      display: block;
+      height: 0;
+      left: 50px;
+      position: absolute;
+      width: 0;
+  }
+  .pss_message_error_type, .pss_message_system_type{
+    background-image: url(img/error_message.png);
+  }
+  .pss_message_warning_type {
+    background-image: url(img/warning_message.png);
+  }
+  .pss_message_confirmation_type {
+    background-image: url(img/confirmation_message.png);
+  }
+  .pss_message_text{
+    margin: 2px 0;
+    white-space: pre-wrap;
+  }
+
+  /*-------- 4.2 Search block ----------*/
+  .pss_blocktype_search .pss_block_buttonbar{
+    text-align: left;
+  }
+  .pss_blocktype_search .pss_actiontype_search, .pss_blocktype_search .pss_actionname_rfcsearch{
+    margin-left: 25%;
+  }
+
+  /*-------- 4.3 Details block ---------*/
+  .pss_blocktype_details .pss_entry_editor {
+    width: 73%;
+  }
+  .pss_blocktype_details .pss_blocktype_rfcinfo{
+    width: 48%;
+  }
+  .pss_blocktype_details label {
+    color: #696969;
+    display: inline-block;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /*-------- 4.4 Upload block ----------*/
+  .pss_blocktype_upload.pss_field{
+    padding: 2px 24px;
+  }
+  .pss_upload_button {
+    display: none;
+  }
+  .pss_file {
+    background: #c4c4c4 url(img/icon_document_upload.png) no-repeat 3px 3px;
+    border-radius: 3px;
+    filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)"; /* for IE */
+    margin-bottom: 3px;
+    overflow: hidden;
+    padding: 3px 3px 2px 22px;
+    position: relative;
+    text-overflow: ellipsis;
+  }
+  .pss_file_name {
+    display: inline;
+  }
+  .pss_uploaded_files {
+      overflow: hidden; 
+      padding-right: 2px;
+  }
+  .pss_uploaded_files:after {
+      clear: both;
+      content: ".";
+      display: block;
+      height: 0;
+      line-height: 0;
+      visibility: hidden;
+  }
+  .pss_button.pss_actiontype_deleteupload {
+    background: transparent url(img/clear_light.png) no-repeat center center;
+    border: none;
+    filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)"; /* for IE */
+    height: 16px;
+    margin: 0;
+    min-width: 16px;
+    padding: 0;
+    position: absolute;
+    right: 2px;
+      top: 3px;
+    width: 16px;
+  }
+  .pss_button.pss_actiontype_deleteupload:hover {
+    background: transparent url(img/clear_medium.png) no-repeat center center;
+  }
+  .pss_actiontype_deleteupload span{
+    display: none;
+  }
+    /* !important rules are necessary because we are overriding the Wicket upload stylesheet */
+    .wupb-progressBar{ 
+      margin: 0 !important;
+      width: 100% !important;
+    }
+    .wupb-border{
+      margin: 0 !important;
+      width: 100% !important;
+    }
+
+  /*----------  4.5 List block ------------*/
+  .pss_blocktype_list {
+    overflow-y: hidden;
+    padding: 0 53px 20px;
+  }
+  .pss_blocktype_list thead th:first-child, .pss_blocktype_list tbody tr td:first-child{
+    padding-left: 5px;
+  }
+  .pss_blocktype_list thead th:last-child, .pss_blocktype_list tbody tr td:last-child{
+    padding-right: 10px;
+  }
+    .pss_blocktype_list .pss_navigation {
+      padding: 5px 0;
+      text-align: right;
+    }
+      .pss_navigation .pss_nav_count {
+        color: #868F99;
+        font-family: "Open Sans Regular";
+        font-size: 11px;
+        vertical-align: middle;
+      }
+      .pss_navigation .pss_nav_prev,
+      .pss_navigation .pss_nav_next {
+        display: inline-block;
+        height: 22px;
+        margin-left: 3px;
+        vertical-align: middle;
+        width: 22px;
+      }
+      .pss_navigation .pss_nav_prev span, .pss_navigation .pss_nav_next span {
+        display: none;
+      }
+      .pss_navigation span.pss_nav_prev {
+        background: #8d9daf url(img/bt_prevpage.png) no-repeat center center;
+        border-radius: 50%;
+        opacity: .4;
+      }
+      .pss_navigation a.pss_nav_prev {
+        background: #8d9daf url(img/bt_prevpage.png) no-repeat center center;
+        border-radius: 50%;
+      }
+      .pss_navigation a.pss_nav_prev:hover{
+        background-color: #697582;
+      }
+      .pss_navigation span.pss_nav_next {
+        background: #8d9daf url(img/bt_nextpage.png) no-repeat center center;
+        border-radius: 50%;
+        opacity: .4;
+      }
+      .pss_navigation a.pss_nav_next {
+        background: #8d9daf url(img/bt_nextpage.png) no-repeat center center;
+        border-radius: 50%;
+      }
+      .pss_navigation a.pss_nav_next:hover {
+        background-color: #697582;
+      }
+      
+  .pss_blocktype_list .pss_field_value {
+    margin-left: 0;
+  }
+  
+  /*---------- 4.6 List block (table) ----*/
+  .pss_table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .pss_table th {
+    background: transparent;
+    color: #1464a1;
+    font-family: "Open Sans Regular";
+    font-size: 13px;
+    font-weight: normal;
+    padding: 3px 3px 15px;
+    text-align: left;
+  }
+  .pss_table td {
+    vertical-align: top;
+  }
+  .pss_table tbody .pss_page_header{
+    display: none;
+  }
+  .pss_table tbody tr {
+    background: transparent;
+    border-bottom: 1px solid #CECECE;
+    cursor: pointer;
+    padding: 3px 5px;
+  }
+  .pss_table tbody tr:hover, .pss_table tbody tr.pss_selected{
+    background: #279FD1;
+    color: #FFF;
+  }
+  .pss_table tbody td{
+    padding: 3px 0 3px 3px;
+  }
+  .pss_table tbody tr.read-only{
+    cursor: default;  
+  }
+  .pss_table tbody tr.read-only:hover{
+    background: transparent;
+    color: inherit;
+  }
+  .pss_table .pss_field_value{
+    width: auto;
+  }
+  .norecords {
+    border-bottom: 1px solid #CECECE;
+    display: block;
+    font-style: italic;
+    padding: 10px;
+  }
+
+  /*---------- 4.7 Generic Info Block ----*/
+  .pss_info_block.pss_withimage:after{ /* clearfix for floats */
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+  }
+    .pss_info_block .pss_fieldtype_infofield.pss_image {
+      float: left;
+      padding: 5px;
+    }
+    .pss_info_block .pss_fieldtype_infofield.pss_image .pss_field_info_button{
+      display: none; /* no info button (placeholder) for info block image field */
+    }
+    .pss_info_block .pss_field:after {
+      clear: none;
+    }
+    .pss_info_block .pss_image .pss_field_label {
+      display: none;
+    }
+
+  /*---------- 4.8 Row Expander ----------*/
+  .pss_table tbody tr.row_expander{
+    background: #279FD1;
+    border-bottom: 1px solid transparent;
+    color: #FFF;
+  }
+  td.expanded{
+    background: #FFFFFF;
+    cursor: default;
+    padding: 0;
+    position: relative;
+  }
+  td.expanded:hover{
+    color: #3f4751;
+  }
+  td.expanded .pss_caseparttype_publisherinfo{
+    margin-top: 15px;
+  }
+  td.expanded .pss_caseparttype_publisherinfo:before {
+      border-color: #279FD1 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+      border-style: solid;
+      border-width: 6px;
+      content: " ";
+      display: block;
+      height: 0;
+      margin: -18px 0 0 21px;
+      position: absolute;
+      width: 0;
+  }
+    td.expanded .pss_blocktype_rowinfo{
+       padding: 0 15px;
+    }
+    td.expanded .pss_blocktype_rowinfo .pss_blocktype_messages{
+       margin: 15px 40px;
+    }
+    td.expanded .pss_messages_block{
+      margin: 15px 13px;
+    }
+  .pss_blocktype_rowinfo .pss_field_label{
+    width: 175px;
+  }
+  .pss_blocktype_rowinfo .pss_field_info_box{
+      top: -4px;
+      width: 175px;
+  }
+  
+  td.expanded .pss_blocktype_rowinfo.pss_withimage .pss_image{
+    width: 160px;
+  }
+  .pss_blocktype_rowinfo.pss_withimage .pss_field_info_box{
+    left: 160px;
+  }
+  .pss_blocktype_rowinfo .pss_field_info_button{
+    display: inline-block;
+      float: left;
+      height: 20px;
+      margin-left: -23px;
+      position: absolute;
+      right: auto;
+      width: 20px;
+  }
+  .pss_blocktype_rowinfo .pss_buttonbar {
+    padding: 10px 10px 10px 0px;
+    margin-bottom: 15px;
+  }
+  .pss_blocktype_rowinfo .pss_buttonbar:after{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+  }
+  .pss_blocktype_rowinfo .pss_buttonbar a,
+  .pss_blocktype_details a.pss_actiontype_showassociation{
+    background: #FFFFFF url(img/link_next.png) no-repeat center right;
+    border: 1px solid #CECECE;
+      border-radius: 3px;
+      color: #3F4751;
+      float: left;
+      font-family: "Open Sans Regular";
+      font-size: 11px;
+      margin: 2px 10px 2px 0;
+      padding: 5px 40px 5px 10px;
+      text-align: left;
+      text-decoration: none;
+      transition: all 0.2s ease-in 0s;
+  }
+  .pss_blocktype_rowinfo .pss_buttonbar a:hover,
+  .pss_blocktype_details a.pss_actiontype_showassociation:hover {
+    background: #FFFFFF url(img/link_next_hover.png) no-repeat center right;
+    border-color: #868F99;
+  }
+
+  /*---------- 4.9 List block (field set table) ---------*/
+  .pss_fieldset .headers{
+    display: none;
+  }
+  .pss_fieldset .pss_field_label{
+    display: inline-block;
+    float: none;
+  }
+
+  /*---------- 4.10 List block (single column) ---------*/
+  .pss_blocktype_list .pss_field_label{
+    min-width: 166px;
+  }
+  .pss_blocktype_list ul {
+    list-style: none;
+    margin-top: 1em;
+  }
+  .pss_blocktype_list li {
+    border-bottom: 1px solid #CECECE;
+    cursor: pointer;
+    padding: 3px 0 3px 3px;
+  }
+  .pss_blocktype_list li:hover {
+    background: #279FD1;
+    color: #FFF;
+  }
+  .pss_blocktype_list div.no_records {
+    border-bottom: 1px solid #CECECE;
+    padding: 10px;
+  }
+  .pss_blocktype_list span.no_records {
+    font-style: italic;
+  }
+  
+  /*---------- 4.11 Edit block ---------*/
+  .pss_blocktype_edit .pss_fieldgroup .pss_caption {
+    width: 74%;
+  }
+  
+  /*---------- 4.12 Add block ---------*/
+  .pss_blocktype_add .pss_fieldgroup .pss_caption {
+    width: 74%;
+  }
+  /*---------- 4.13 Wrapper block ---------*/
+   .pss_blocktype_casepartwrapper .pss_block {
+     padding: 0 0 20px;
+   }
+
+  /*---------- 4.14 Text block ---------*/
+  .pss_infotext:before {
+      border-color: #dadada rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+      border-style: solid;
+      border-width: 11px;
+      bottom: -21px;
+      content: " ";
+      display: block;
+      height: 0;
+      left: 49px;
+      position: absolute;
+      width: 0;
+  }
+
+  .pss_infotext:after {
+      border-color: #ffffff rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+      border-style: solid;
+      border-width: 10px;
+      bottom: -18px;
+      content: " ";
+      display: block;
+      height: 0;
+      left: 50px;
+      position: absolute;
+      width: 0;
+  }
+
+  .pss_page_infotext {
+      background: url("img/helptext.png") no-repeat scroll 15px center #fff;
+      margin: 15px 53px 35px;
+      padding: 18px 18px 18px 64px;
+  }
+
+  .pss_infotext {
+      border: 1px solid #dadada;
+      border-radius: 3px;
+      color: #3f4751;
+      line-height: 1.4;
+      position: relative;
+      white-space: pre-wrap;
+  }
+   
+/*-------------------------------------*/
+/*-------- 5 FieldGroup styling -------*/
+/*-------------------------------------*/
+.pss_fieldgroup:first-child{
+  padding-top: 0;
+}
+.pss_fieldgroup{
+  padding: 25px 0 2px;
+}
+.pss_fieldgroup .pss_caption {
+    color: #1464a1;
+    font-family: "Open Sans Regular";
+    font-size: 15px;
+    margin-bottom: 20px;
+    
+}
+.pss_fieldgroup_helptext{
+  background: transparent url(img/helptext_small.png) no-repeat 15px center;
+  margin: 10px 0 20px 0;
+  padding: 10px 64px 10px;
+  width: 73%;
+}
+.pss_fieldgroup_helptext:before{
+  border-width: 8px;
+  bottom: -16px;
+}
+.pss_fieldgroup_helptext:after{
+    border-color: #F2F2F2  rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-width: 7px;
+    bottom: -14px;
+}
+
+/*------------------------------------*/
+/*---------- 6 Field styling ---------*/
+/*------------------------------------*/
+.pss_field {
+  margin-bottom: 5px;
+  position: relative;
+}
+.pss_field:after{ /* clearfix for floats */
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.pss_field .pss_header{
+  display: none;
+}
+.pss_field_label {
+  display: inline-block;
+  margin-right: -3px; /* compensation inline-block */
+  padding-right: 20px;
+  text-align: left;
+  word-wrap: break-word;
+}
+.pss_field_input {
+  border: 1px solid #CECECE;
+  border-radius: 3px;
+  display: block;
+  padding: 2px 4px;
+  width: 100%;
+}
+.pss_field_input input[type=checkbox], .pss_field_input input[type=radio]{
+  margin-right: 5px;
+  vertical-align: text-top;
+}
+.pss_entry_editor {
+  display: inline-block;
+}
+.pss_entry_editor .pss_field_value {
+  margin-left: 0;
+}
+.pss_mandatory .pss_field_label:after {
+  content: ' *';
+}
+.pss_field_value {
+  display: inline-block; 
+  vertical-align: top;
+  width: 48%;
+}
+.pss_field_value img {
+  float: left;
+  max-width: 100%;
+  padding-right: 2px;
+}
+.pss_image .pss_field_value {
+  margin-left: 0;
+  width: auto;
+}
+.pss_actions{
+    display: inline-block;
+    width: 25%;
+}
+.pss_actions a{
+  display: inline-block;
+}
+.pss_actions a span{
+  display: inline-block;
+  text-indent: -999999px;
+}
+
+  /*---------- 6.1 Text area field -------*/
+  .pss_field_textarea {
+    max-height: 60px;
+    overflow-y: auto;
+    vertical-align: top;
+    white-space: pre-line;
+    width: 100%;
+  }
+  textarea.pss_field_textarea {
+    height: 60px;
+    max-height: 800px;
+    min-height: 22px;
+    resize: vertical;
+  }
+  .pss_readonly .pss_field_textarea{
+    overflow-y: auto;
+    padding-top: 4px;
+    white-space: pre-line;
+  }
+  .pss_fieldset .pss_field_textarea {
+    width: auto;
+  }
+
+  /*---------- 6.2 Expandable field -------*/
+  .pss_field_expandable {
+    overflow-y: hidden;
+    width: 100%;
+  }
+  .pss_readonly .pss_field_expandable{
+    white-space: pre-line;
+  }
+  .more, .less{
+      color: #3F4751;
+      font-family: "Open Sans Regular";
+      font-size: 11px;
+      margin-right: 10px;
+      padding: 2px 37px 2px 0;
+      text-align: right;
+      text-decoration: none;
+      white-space: nowrap;
+  }
+  .more{
+    background: transparent url(img/link_next.png) no-repeat scroll right center;
+  }
+  .more:hover{
+    background-image: url(img/link_next_hover.png);
+  }
+  .less{
+    background: transparent url(img/link_prev.png) no-repeat scroll right center;
+  }
+  .less:hover{
+    background-image: url(img/link_prev_hover.png);
+  }
+  /*---------- 6.3 Date/time field -------*/
+  .time-icon{
+    background: #FFFFFF url(img/time.png) no-repeat center center;
+    border: 1px solid #B7B7B7;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+      height: 20px;
+      margin-left: 3px;
+      vertical-align: middle;
+      width: 20px;
+  }
+  .time-icon:hover{
+    background-image: url(img/time_hover.png);
+  }
+  .pss_datepicker input, .pss_datetimepicker input, .pss_timepicker input {
+    border: 1px solid #CECECE;
+    border-radius: 3px;
+    padding: 2px 4px;
+  }
+  .pss_datetimepicker select{
+    border: 1px solid #CECECE;
+    border-radius: 3px 3px 3px 3px;
+    padding: 2px;
+  }
+  .pss_datetimepicker select option{
+    padding-right: 10px;
+  }
+  .pss_field.pss_error .pss_datetimepicker{
+    background: transparent url("img/icon_field_error.png") no-repeat scroll 99% 2px;
+  }
+  .date {
+    min-width: 95px;
+    width: 26%;
+  }
+  .time{
+    min-width: 50px;
+    width: 26%;
+  }
+  .aa-time{
+    max-height: 130px;  
+  }
+  .ampm{
+    padding-left: 3px;
+    vertical-align: middle;
+  }
+  .ampm input {
+    border: none;
+    margin-left: 3px;
+  }
+  .ampm label {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+  .yui-skin-sam{
+    height: 100%;
+    display: inline-block;  
+    margin-right: 15px;
+    vertical-align: middle;
+  }
+  .yui-skin-sam img{
+    background: #FFFFFF url("img/calendar.png") no-repeat scroll center center;
+    border: 1px solid #B7B7B7 !important;
+      border-radius: 50%;
+      height: 0;
+      min-width: inherit;
+      qopacity: .4; 
+      padding: 10px;
+      width: 0;
+  }
+  .yui-skin-sam img:hover{
+    background-image: url(img/calendar_hover.png);
+  }
+  .yui-skin-sam .yui-calcontainer{
+    background-color: #FFFFFF !important;
+  }
+  .yui-skin-sam .yui-calcontainer .title{
+    background: none !important;
+  }
+  .yui-skin-sam .yui-calcontainer .calclose{
+    background: transparent url(img/close.png) no-repeat right center !important;
+  }
+  .yui-skin-sam .yui-calendar .calnavleft{
+    background: #8D9DAF url(img/calendar_prev.png) no-repeat center center !important;
+    border-radius: 50%;
+      display: block;
+      height: 20px !important;
+      width: 20px !important; 
+  }
+  .yui-skin-sam .yui-calendar .calnavright{
+    background: #8D9DAF url(img/calendar_next.png) no-repeat center center !important;
+    border-radius: 50%;
+      display: block;
+      height: 20px !important;
+      width: 20px !important;
+  }
+  .yui-skin-sam .yui-calendar .calnavleft:hover, .yui-skin-sam .yui-calendar .calnavright:hover{
+    background-color: #697582 !important;
+  }
+  img.dropdown{
+    margin-left: -25px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .timepicker{
+    background: #FFFFFF;
+    border: 1px solid #808080;
+    color: #3f4751;
+    font-size: 10px;
+    position: absolute;
+    width: 140px;
+    z-index: 99998;
+  }
+  .timepicker ul{
+    list-style:none;
+  }
+  .timepicker li{
+    border-right: 1px solid #F4f4f4;
+    cursor: pointer;
+    display: block;
+    float: left;
+    padding: 1px 4px;
+    width: 25%;
+    z-index: 99999;
+  }
+  .timepicker li:last-child{
+    border-right:none;
+  }
+  .timepicker .close{
+    background: #FFF url(img/close.png) no-repeat 120px center;
+    border-bottom: 1px solid #CCCCCC;
+    cursor: pointer;
+      font-size: 14px;
+      height: 25px;
+      text-align: right;
+  }
+  .timepicker .close span{
+    display:none;
+  }
+
+  /*---------- 6.4 Boolean field  --------*/
+  .pss_boolean_group .pss_field_label {
+    text-align: left;
+    padding-left: 3px;
+  }
+  .pss_boolean .pss_field_input, .pss_questiontypesingleselectradio .pss_field_input, .pss_questiontypemultiselect .pss_field_input{
+    border: none;
+  }
+
+  /*--------- 6.5 Reference field --------*/
+  .pss_selectvalue {
+    color: #006699;
+  }
+  .pss_selectvalue_link{
+    background: #FFFFFF url(img/selectavalue.png) no-repeat center center;
+    border: 1px solid #B7B7B7;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    opacity: 1;
+      width: 20px;
+    }
+    .pss_selectvalue_link:hover{
+      background-color: #F2F2F2;
+      border-color: #989898;
+    }
+    .pss_selectvalue_link.pss_disabled{
+    opacity: .4;
+    cursor: default;
+    }
+  /*--------- 6.6 Reference field dropdown --------*/
+  .pss_field_input_dropdown{
+    background: #FFF url(img/dropdown.png) no-repeat 99%;
+    cursor: pointer;
+    padding-right: 26px;
+  }
+  .pss_field.pss_error .pss_field_input.pss_field_input_dropdown{
+    background-image: url(img/dropdown_field_error.png);
+  }
+  /*--------- 6.7 Image field ------------*/
+  .pss_image_box img {
+    display:block;
+    margin:auto;
+    float:none;
+  }
+
+  /*--------- 6.8 URL field --------------*/
+  .pss_url_field {
+    padding-left: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pss_globe_icon {
+    background: url(img/icon_link.png) no-repeat center left;
+    background-size: 13px;
+    filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)"; /* for IE */
+  }
+  .pss_document_icon {
+    background: url(img/icon_document_upload.png) no-repeat center left; 
+  }
+  .pss_field.pss_error .pss_field_input {
+    background: #fff url("img/icon_field_error.png") no-repeat scroll 99% 2px;
+    padding-right: 22px;
+  }
+  
+  /*---------- 6.9 Field errors ----------*/
+  .pss_field_feedback {
+    display: block;
+    font-style: italic;
+    margin-left: 25%;
+    vertical-align: top;
+    width: 48%;
+  }
+  .pss_field_feedback_label {
+    color: red;
+  }
+  td .pss_field_feedback {
+    margin-left: 0;
+  }
+  .pss_field_label, .pss_actions {
+    vertical-align: top;
+    width: 25%;
+  }
+  
+  /*---------- 6.10 Field info ----------*/
+  .pss_field_info {
+    background: #8d9daf url("img/helptext_small.png") no-repeat scroll center center;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .pss_field_info:hover{
+    opacity: 1;
+  }
+  .pss_field_info_button {
+      height: 18px;
+      position: absolute;
+      right: 76%;
+      top: 2px;
+      width: 18px;
+  }
+  .pss_field_info_box {
+    background: #fff;
+      box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
+      border-radius: 2px;
+      display: none;
+      left: -3px;
+      padding: 4px;
+      position: absolute;
+      top: 0;
+      width: 25%;
+      word-wrap: break-word;
+      z-index: 9;
+  }
+  .pss_field_info_box .title {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .pss_field_info_box .close {
+    background: transparent url(img/clear_light.png) no-repeat center top;
+    background-size: 80%;
+    border: 0px;
+    cursor: pointer;
+    float: right;
+    height: 16px;
+    text-indent: -99999px;
+    width: 16px;
+  }
+  
+  /*---------- 6.11 Question fields ----------*/
+  .pss_questiontypesingleselectradio.pss_error .pss_field_input, .pss_questiontypemultiselect.pss_error .pss_field_input{
+     background: url("img/icon_field_error.png") no-repeat scroll 99% 2px transparent;
+  }
+
+  /*---------- 6.12 Filter Toggle ----------*/
+  .pss_filter_on .pss_filtertoggle_link {
+    background: url("img/filter_on.png") no-repeat scroll center center rgba(255, 255, 255, 1);
+    border: 2px solid #FFC200;
+    border-radius: 3px;
+    }
+  .pss_filter_off .pss_filtertoggle_link {
+    background: url("img/filter_off.png") no-repeat scroll center center rgba(255, 255, 255, 1);
+    border: 1px solid #cecece;
+      border-radius: 3px;
+    }
+    .pss_filter_off.pss_filter_inactive .pss_filtertoggle_link {
+    background: url("img/filter_off.png") no-repeat scroll center center rgba(223, 223, 223, 1);
+    pointer-events: none;
+       cursor: default;
+    }
+    .pss_filter_on .pss_filtertoggle_link:before {
+      border-color: transparent transparent transparent #FFC200;
+      border-width: 7px;
+      right: -13px;
+      top: 4.4px;
+  }
+  .pss_filter_off .pss_filtertoggle_link:before {
+      border-color: transparent transparent transparent #cecece;
+      border-width: 7px;
+      right: -13px;
+      top: 4.4px;
+  }
+  .pss_filter_field .pss_filtertoggle_link:after, 
+  .pss_filter_field .pss_filtertoggle_link:before {
+      border-image: none;
+      border-style: solid;
+      content: "";
+      position: absolute;
+  }
+  .pss_filter_field .pss_filtertoggle_link:after {
+      border-color: transparent transparent transparent #ffffff;
+      border-width: 6px;
+      right: -10px;
+      top: 5px;
+  }
+  .pss_filter_field.pss_filter_inactive .pss_filtertoggle_link:after {
+      border-color: transparent transparent transparent #dfdfdf;
+  }
+  .pss_filter_field .pss_filtertoggle_link:after, 
+  .pss_filter_field .pss_filtertoggle_link:before {
+      border-image: none;
+      border-style: solid;
+      content: "";
+      position: absolute;
+  }   
+    .pss_filter_on .pss_field_input {
+        border: 2px solid #FFC200;
+    }
+    .pss_filter_off .pss_field_input {
+        margin: 1px;
+    }
+  .pss_filtertoggle {
+      position: absolute;
+      width: 20px;
+      height: 23px;
+      display: block;
+      top: 0;
+      right: 75%;
+  }
+  .pss_filtertoggle_link {
+    display: block;
+    height: 100%;
+      width: 100%;
+  }
+  .pss_filtertoggle_label {
+    display: none;
+  }
+  .pss_filter_field .pss_field_info_button {
+    margin-right: 18px;
+    right: 76%; /* must be same as pss_filtertoggle */
+  }
+  
+  .pss_filter_field .pss_field_label {
+    padding-top: 3px;
+  }
+  
+  .pss_filter_field .pss_actions {
+    padding-top: 2px;
+  }
+  
+  /*---------- 6.13 Others ----------*/
+  .pss_parkingarea .layout tr{
+    height: 25px;
+  }
+  .pss_parkingarea .checkbox-col{
+    width: 20px;
+  } 
+
+/*------------------------------------*/
+/*-------- 7 Dialog styling ----------*/
+/*------------------------------------*/
+.wicket-modal {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+div.wicket-modal div.w_content_container{
+  cursor: default;
+  position: static !important;
+}
+div.wicket-modal div.w_blue div.w_top, 
+div.wicket-modal div.w_blue div.w_bottom, 
+div.wicket-modal div.w_blue div.w_topLeft, 
+div.wicket-modal div.w_blue div.w_topRight, 
+div.wicket-modal div.w_blue div.w_bottomRight, 
+div.wicket-modal div.w_blue div.w_bottomLeft,
+div.wicket-modal div.w_blue div.w_left,
+div.wicket-modal div.w_blue div.w_right  {
+    background: #fff !important;
+}
+div.wicket-modal div.w_caption{
+  background-color: rgba(0, 0, 0, 0) !important;
+  cursor: move !important;
+  height: 50px !important;
+  z-index: 11;
+}
+div.wicket-modal div.w_content_2{
+  position: relative;
+    top: -50px;
+    z-index: 10;
+}
+div.wicket-modal div.w_content_3{
+  border: none !important;
+}
+.wicket-modal .pss_page_header{
+  border-bottom: 1px solid #F0F0F0;
+  box-shadow: none;
+  margin-bottom: 15px;
+}
+.wicket-modal .pss_page_header .pss_caption{
+  margin: 0 53px;
+}
+.wicket-modal .pss_helptext{
+  padding: 0 10px;
+}
+.wicket-modal .block{
+  padding: 0 10px;
+}
+.wicket-modal .pss_blocktype_messages{
+  padding: 15px 10px;
+}
+.wicket-modal .pss_blocktype_list {
+    padding: 0 0 10px;
+}
+.wicket-modal .pss_buttonbar {
+  background: transparent;
+}
+.wicket-modal .pss_field_label, 
+.wicket-modal .pss_field_input{
+  min-width: 100px;
+}.pss_button.pss_actiontype_save
+
+.wicket_modal .pss_messages_block{
+  margin-bottom: 0;
+  margin-left: 0;
+    margin-right: 0;
+}
+.wicket_modal .pss_messages_block:before{
+  content: none;
+}
+.wicket_modal .pss_messages_block:after{
+  content: none;
+}
+/*------------------------------------*/
+/*----- 8 Action/Button styling ------*/
+/*------------------------------------*/
+.pss_action{
+  white-space: nowrap;
+}
+.pss_buttonbar {
+  padding: 25px 0 25px 0;
+  text-align: center;
+}
+.pss_buttonbar:after{
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.pss_button {
+  background: #c4c4c4;
+  border-radius: 2px;
+  color: #3F4751;
+    display: inline-block;
+    font-family: "Open Sans Regular";
+    font-size: 14px;
+    margin: 5px;
+    min-width: 68px;
+    padding: 5px 15px;
+    text-decoration: none;
+    transition: background .3s ease 0s; 
+}
+.pss_button:hover {
+  background: #989898;
+  color: #3F4751;
+}
+.pss_button.pss_actiontype_save, .pss_button.pss_actiontype_search, .pss_button.pss_actionname_rfcsearch {
+  background: #1464a1;
+  color: #FEFEFE;
+}
+.pss_button.pss_actiontype_save:hover, .pss_button.pss_actiontype_search:hover, .pss_button.pss_actionname_rfcsearch:hover {
+  background: #105183;
+}
+.pss_button.pss_actiontype_save.pss_disabled, .pss_button.pss_actiontype_search.pss_disabled, .pss_button.pss_actionname_rfcsearch.pss_disabled,
+.pss_button.pss_actiontype_save.pss_disabled:hover, .pss_button.pss_actiontype_search.pss_disabled:hover, .pss_button.pss_actionname_rfcsearch.pss_disabled:hover {
+  background: #c4c4c4 !important;
+  color: inherit;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+  /*----------- 8.1 Save button -----------*/
+
+  /*----------- 8.2 Disabled button -----------*/
+  .pss_button.pss_disabled, span.pss_button {
+    opacity: .6;
+    cursor: default;
+    pointer-events: none;
+  }
+  .pss_button.pss_disabled:hover{
+    background-color: #c4c4c4;
+    opacity: 0.6;
+  }
+
+/*---------------------------------------------------*/
+/*------ 9 Module "Selector" specific styling -------*/
+/*---------------------------------------------------*/
+
+  /*---------- 9.1 Selector Info block ---------*/
+    .pss_blocktype_rfcinfo {
+      border-bottom: 1px solid #ccc;
+      left: 25%;
+      padding: 5px 0;
+      position: relative;
+      width: 48%;
+    }
+    .pss_readonly .pss_blocktype_rfcinfo{
+      border: none;
+      padding: 0 4px;
+    }
+    .pss_blocktype_rfcinfo .pss_field, .pss_blocktype_details .pss_blocktype_rfcinfo .pss_field {
+      border-bottom: none;
+      background: transparent;
+      padding: 0;
+    }
+    .pss_blocktype_rfcinfo .pss_field .pss_url_field{
+      background-size: 12px auto;
+      padding-left: 14px;
+    }
+      .pss_blocktype_rfcinfo .pss_field_label{
+        font-style: italic;
+        width: 115px;
+      }
+      .pss_blocktype_rfcinfo .pss_field_label:after {
+          content: "";
+      }
+      .pss_blocktype_rfcinfo .pss_field_info_button {
+        height: 12px;
+        left: 98px; /* 115 - 12 - 5 */
+        top: 4px;
+        width: 12px;
+      }
+      .pss_blocktype_rfcinfo .pss_field_info {
+        background-size: 12px;
+      }
+      .pss_blocktype_rfcinfo .pss_field_info_box {
+        left: -3px;
+          top: -4px;
+          width: 120px;
+      }
+      .pss_blocktype_rfcinfo .pss_field_info_box .close {
+        background-size: 12px;
+      }
+        .pss_field_value_label{
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          display: inline-block;
+          padding: 0 16px 0 3px;
+            width: 100%;
+        }
+        .pss_blocktype_rfcinfo .pss_field_value img {
+          border-radius: 4px;
+          padding-top: 0;
+        }
+      .pss_clearvalue_link{
+        background: transparent url(img/clear_light.png) no-repeat center center;
+        height: 16px;
+        left: 74%;
+          margin-left: -27px;
+          position: absolute;
+          top: 2px;
+          width: 16px;
+      }
+      .pss_clearvalue_link:hover{
+        background: transparent url(img/clear_medium.png) no-repeat center center;
+      }
+      .pss_clearvalue_link .pss_clearvalue{
+        display: none;
+      }
+    
+  /*----- 9.2 Selector Info block with image -----*/
+      
+  .pss_blocktype_rfcinfo.pss_withimage {
+    min-height: 50px;
+  }
+      .pss_blocktype_rfcinfo.pss_withimage .pss_field_textarea {
+        width: 90px;
+      }
+      .pss_blocktype_rfcinfo.pss_withimage .pss_field_info_button{
+        left: 183px; /* 5 + 75 + 5 + 115 - 12 - 5 */
+      }
+      .pss_blocktype_rfcinfo.pss_withimage .pss_field_info_box {
+        width: 205px ; /* 5+75+5 +115 +5 */
+      }
+      
+  /*----- 9.3 Selector Info block errors -----*/
+  .pss_field.pss_error .pss_blocktype_rfcinfo{
+    display: none;
+  }
+  
+  /*----- 9.4 Selector editors -----*/
+  .pss_rfc_with_info.pss_readonly .pss_entry_editor{
+    padding: 2px 4px 8px;
+    width: 48%;
+  }
+  .pss_rfc_with_info.pss_readonly .pss_blocktype_rfcinfo .pss_entry_editor{
+    padding: 0;
+    width: auto;
+  }
+  .pss_blocktype_rowinfo .pss_rfc_with_info.pss_readonly .pss_entry_editor{
+    background-color: #fff;
+    padding: 0px;
+  }
+  
+  .pss_rfc_with_info .pss_rfc_with_info.pss_readonly .pss_entry_editor{
+    background-color: transparent;
+    padding: 0px;
+  }
+
+
+/*-----------------------------------------------*/
+/*------ 10 Wicket internal error page ----------*/
+/*-----------------------------------------------*/
+.pss-error-page h1 {
+  background: url("img/error_message.png") no-repeat scroll 15px center #FFFFFF;
+  border-radius: 4px 4px 0 0;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    color: #3F4751;
+    font-family: 'Open Sans Semibold';
+    font-size: 18px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    text-indent: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.pss-error-page p {
+  margin: 0 1em;
+}
+.pss-error-page hr {
+  border-top: 1px solid #D4D4D4;
+  border: 0px none;
+  margin: 1em 0 0;
+  height: 1px;
+}
+p.pss-error-code{
+  background-color: #FFFFFF;
+    border: 1px solid #D4D4D4;
+    color: #F63939;
+    display: inline-block;
+    font-family: Open Sans Semibold;
+    margin: 0.5em 1em;
+    padding: 0.5em;
+}
+.pss-error-page p.copyright{
+  padding-bottom: 25px;
+}
+#bug{
+  display: none;
+}
+
+/*------------------------------------*/
+/*-------- 11 List cases page --------*/
+/*------------------------------------*/
+.pss_site_entry{
+  background: url("img/PSSicon.png") no-repeat scroll 15px center #FFFFFF;
+  border-bottom: #E4E4E4;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  color: #3F4751;
+  font-family: 'Open Sans Semibold';
+    font-size: 18px;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  overflow: hidden;
+  text-indent: 53px;
+    text-overflow: ellipsis;
+    transition: text-shadow 0.3s ease 0.5s;
+    white-space: nowrap;
+}
+.cases-list {
+   padding: 0 10px 10px 0;
+}
+.pss_cases:after{
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.cases-list a {
+  text-decoration: none;
+}
+.cases-list a:hover {
+  text-decoration: underline;
+}
+.cases-list ul {
+  list-style: none;
+  padding-left: 53px;
+}
+.cases-list ul > li {
+  color: #868F99;
+    font-family: "Open Sans Regular";
+    font-size: 16px;
+    margin: 10px 0;
+}
+.cases-list ul li ul{
+  padding-left: 0px;
+}
+.cases-list ul li ul li{
+  font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+  margin: 0 0 2px;
+}
+.pss_case_type_name{
+  font-weight: bold;
+}
+.pss_cases .case_code{
+  display: block;
+    float: left;
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 25%;
+}
+.pss_cases .case_desc{
+  color: #696969;
+    display: block;
+    float: left;
+    vertical-align: text-top;
+    width: 75%;
+}
+.toggleable{
+  cursor: pointer;
+}
+.pss_site_entry.expanded .indicator{
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right:8px solid #279FD1;
+  height: 0;
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  transition: right 0.3s ease 0s;
+  width: 0;
+}
+.pss_site_entry.expanded:hover .indicator {
+    right: 30px;
+}
+.pss_site_entry.collapsed .indicator{
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #279FD1;
+  height: 0; 
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  transition: box-shadow 0.3s ease 0s;
+  width: 0;
+}
+.pss_site_entry.collapsed:hover .indicator {
+    box-shadow: 0 -5px 0 #279FD1;
+}
+
+/*-------------------------------------*/
+/*------- 12 Wicket components --------*/
+/*-------------------------------------*/
+
+  /*----- 12.1 Wicket feedback panel ------*/
+  ul.feedbackPanel {
+    border-bottom: 1px solid #FFCC33;
+    display: block;
+    list-style: none;
+  }
+  ul.feedbackPanel li {
+    height: 24px;
+    background-size: 17px 17px;
+  }
+  ul.feedbackPanel li.error {
+    color: #eec;
+    background: #DD2222 url(img/error_message.png) no-repeat scroll center center;
+  }
+  ul.feedbackPanel li.warning {
+    background: #FFCC00 url(img/warning_message.png) no-repeat scroll center center;
+  }
+  ul.feedbackPanel li.info {
+    background: #279FD1 url(img/helptext_small.png) no-repeat scroll center center;
+  }
+  ul.feedbackPanel li span {
+    padding: .5em 0 0 2.5em;
+  }
+
+  /*----- 12.2 Busy indicator -----*/
+  .pss_ajax_indicator {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+  }
+
+  /*----- 12.3 Autocomplete styling -----*/
+  .wicket-aa-container{
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px 0 #888;
+    background: #fff;
+    border-radius: 0 0 3px 3px;
+    margin: 1px 0 0 0;
+    text-align: left;
+    z-index: 20001 !important;
+  }
+  .wicket-aa ul {
+    list-style: none;
+    margin: 0;
+  }
+  .wicket-aa ul li {
+    cursor: pointer;
+    padding: 0 4px;
+  }
+  .wicket-aa ul li.selected {
+    background: #279FD1;
+    color: #FFF;
+  }
+  .wicket-aa .searchTerm{
+    font-weight: bold;
+  }
+  /*----- 12.4 Dialog & Overlay -----*/
+  div.wicket-mask-dark{
+    background-color: #FFFFFF !important;
+    opacity: 0.83 !important;
+  }
+  div.wicket-modal a.w_close{
+    background: transparent url(img/close_button.png) no-repeat center center !important;
+    opacity: .8;
+  }
+  div.wicket-modal a.w_close:hover{
+    background: transparent url(img/close_button.png) no-repeat center center !important;
+    opacity: 1;
+  }
+  
+/*--------------------------------------*/
+/*--------- 13 Generic classes ---------*/
+/*--------------------------------------*/
+/* Show field value as item title, hide field label */
+.pss_title .pss_field_label {
+  display: none;
+}
+.pss_title .pss_entry_editor {
+  font-size: 2em;
+}
+/* large subtitle */
+.pss_large .pss_field_label {
+  font-size: 1.5em;
+}
+/* Clearfix for floats */
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+@media (max-width: 480px) {
+  body{
+    padding: 0;
+  }
+  .pss_content{
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0px;
+    padding-bottom: 0;
+  }
+  .pss_page_header{
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+  .pss_block {
+      padding: 0 6px;
+  }
+  .pss_cases .case_code, .pss_cases .case_desc{
+    width: 100%;
+  }
+  .pss_buttonbar{
+    padding: 6px 0;
+  }
+  .pss_button{
+    margin: 0 5px;
+  }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+}
+@media (min-width: 768px) and (max-width: 979px) { 
+}
+
+/*--------------------------------------*/
+/*-------- 14 Print style sheet --------*/
+/*--------------------------------------*/
+@media print {
+  body{
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .pss_content{
+    box-shadow: none;
+    background: #FFF;
+  }
+  /* display none */
+  .pss_buttonbar,.pss_nav_prev,.pss_nav_next,.time-icon,.yui-skin-sam,.pss_selectvalue_link,#wicketDebugLink{
+    display: none;
+  }
+  .pss_field_input,.pss_datepicker input,.pss_datetimepicker input,.pss_timepicker input,input,select,option,textarea{
+    border: none;
+    background-color: #F2F2F2;
+  }
+  .wicket-modal{
+    left: 2px !important;
+  }
+}
+
+/*--------------------------------------*/
+/*-------- 15 Portal style sheet -------*/
+/*--------------------------------------*/
+.run-in-portal body{
+  background-color: #F2F2F2;
+}
+
+/*------------- 15.1 Gadget ------------*/
+.run-in-portal.gadget .pss_blocktype_search,
+.run-in-portal.gadget .pss_blocktype_add{
+  margin-top: 7px;
+}
+.run-in-portal.gadget .pss_field_label{
+  overflow: hidden;
+  padding-right: 5px;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+}
+.run-in-portal.gadget .pss_fieldname_searchkeywords{
+  width: 70%;
+}
+
+.run-in-portal.gadget div.wicket-modal div.w_caption{
+  height: 40px !important;
+}
+.run-in-portal.gadget div.wicket-modal div.w_content_container{
+  overflow: hidden !important;
+}
+
+
+/*------------- 15.2 Modal -------------*/
+html.run-in-portal.modal{
+  background: rgba(255, 255, 255, 0.8);
+  height: 100%;
+}
+.run-in-portal.modal body, .run-in-portal.modal .pss_content{
+  height: 100%;
+}
+.run-in-portal.modal body{
+  background-color: transparent;
+  max-width: 830px; /* see also top & bottom toolbars */
+  overflow-y: hidden;
+  padding: 0 0 103px;
+}
+.run-in-portal.modal .pss_content{
+  border-radius: 0 0 4px 4px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+    margin: 54px 0;
+    padding-bottom: 40px;
+    position: relative;
+}
+.run-in-portal.modal .pss_main_casepart{
+  background: #f2f2f2;
+  height: 100%;
+    overflow-y: auto;
+    padding-top: 10px;
+}
+.run-in-portal.modal .pss_main_casepart form > .pss_casepart_buttonbar{
+  padding: 0;  
+}
+.run-in-portal.modal .pss_actiontype_finish{
+  background: transparent url(img/close_button.png) no-repeat center center;
+  display: block;
+    height: 32px;
+    opacity: .8;
+    position: absolute;
+    right: 0;
+    top: -36px;
+    width: 32px;
+    z-index: 999;
+}
+.run-in-portal.modal .pss_actiontype_finish:hover{
+  opacity: 1;
+}
+.run-in-portal.modal .pss_errorcasepart .pss_actiontype_finish {
+    top: 0;
+}
+
+.run-in-portal.modal .pss_main_casepart > .pss_group > .pss_page_header{
+  border-radius: 4px 4px 0 0;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+    height: 40px;
+    margin-top: 14px;
+    max-width: 830px;
+    min-width: 320px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+.run-in-portal.modal .pss_page_buttonbar{
+  background: #F2F2F2;
+  bottom: 0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+   padding: 0;
+   position: absolute;
+   width: 100%;
+   z-index: 10;
+}
+.run-in-portal.modal .subcasepart .pss_page_buttonbar{
+  background: inherit;
+  box-shadow: inherit;
+  height: inherit;
+  position: inherit;
+  width: inherit;
+}
+
+/*------------- 15.2 Frame UI -------------*/
+html.run-in-frameui.modal,.run-in-frameui.modal body, .run-in-frameui.modal .pss_content{
+  background: rgba(255, 255, 255, 0.8);
+  height: 100%;
+}
+.run-in-frameui.modal body{
+  background-color: transparent; /* #f2f2f2 */
+  max-width: 830px; /* see also top & bottom toolbars */
+  overflow-y: hidden;
+  padding: 0 0 103px;
+}
+.run-in-frameui.modal .pss_content{
+  border-radius: 0 0 4px 4px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+    margin: 54px 0;
+    padding-bottom: 40px;
+    position: relative;
+}
+.run-in-frameui.modal .pss_main_casepart{
+  background: #f2f2f2;
+  height: 100%;
+    overflow-y: auto;
+    padding-top: 10px;
+}
+.run-in-frameui.modal .pss_main_casepart form > .pss_casepart_buttonbar{
+  padding: 0;  
+}
+.run-in-frameui.modal .pss_actiontype_finish{
+  background: transparent url(img/close_button.png) no-repeat center center;
+  display: block;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    top: -36px;
+    width: 32px;
+    z-index: 999;
+}
+.run-in-frameui.modal .pss_errorcasepart .pss_actiontype_finish {
+    top: 0;
+}
+.run-in-frameui.modal .pss_main_casepart > .pss_group > .pss_page_header{
+  border-radius: 4px 4px 0 0;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+    height: 40px;
+    margin-top: 14px;
+    max-width: 830px;
+    min-width: 320px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+.run-in-frameui.modal .pss_page_buttonbar{
+  background: #F2F2F2;
+  bottom: 0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+   padding: 0;
+   position: absolute;
+   width: 100%;
+   z-index: 10;
+}
+.run-in-frameui.modal .subcasepart .pss_page_buttonbar{
+  background: inherit;
+  box-shadow: inherit;
+  height: inherit;
+  position: inherit;
+  width: inherit;
+}
+
+
+/*------------- 15.3 Icon-list -------------*/
+/* Alternate styling for a listpage; used   */
+/* for the Servicefinder in a portal gadget */
+/* To enable this add css class 'icon_list' */
+/* to the list page via the styling tab     */
+/*------------------------------------------*/
+.icon_list .pss_table tbody tr {
+  border-bottom: 0px;
+}
+.icon_list .pss_table thead .headers {
+  display: none;
+}
+.icon_list .pss_table .pss_fieldtype_listfield {
+  background-image: url('img/selectavalue.png');
+  background-repeat: no-repeat;
+  padding-left: 22px;
+  padding-bottom: 0px;
+  padding-top: 2px;
+  font-family: "Open Sans Regular";
+  font-size: 13px;
+  color: #1464A1;
+}
+.icon_list .pss_table td {
+  line-height: 10px
+}
+.icon_list .pss_table .pss_fieldtype_listfield:hover {
+  background-image: url('img/selectavalue_hover.png');
+  color: #105183;
+}
+.icon_list .pss_table tr:hover {
+  background: none;
+}
