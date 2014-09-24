@@ -56,15 +56,15 @@ DtoProvider.prototype.findAll = function(callback) {
 DtoProvider.prototype.findById = function(id, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
-      else {
-        dto_collection.findOne({_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(error, result) {
-          if( error ) callback(error)
-            else callback(null, result)
-          });
+    else {
+      var newObjectId = new ObjectID.createFromHexString(id);
+      dto_collection.findOne({_id: newObjectId}, function(error, result) {
+        if( error ) callback(error)
+          else callback(null, result)
+        });
       }
     });
 };
-
 
 //save new dto
 DtoProvider.prototype.save = function(dtos, callback) {
@@ -91,8 +91,9 @@ DtoProvider.prototype.update = function(id, dtos, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error);
     else {
+      var newObjectId = new ObjectID.createFromHexString(id);
       dto_collection.update(
-        {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(id)},
+        {_id: newObjectId},
         dtos,
         function(error, dtos) {
           if(error) callback(error);
@@ -107,8 +108,9 @@ DtoProvider.prototype.delete = function(id, callback) {
   this.getCollection(function(error, dto_collection) {
     if(error) callback(error);
     else {
+      var newObjectId = new ObjectID.createFromHexString(id);
       dto_collection.remove(
-        {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(id)},
+        {_id: newObjectId},
         function(error, dto){
           if(error) callback(error);
           else callback(null, dto)
