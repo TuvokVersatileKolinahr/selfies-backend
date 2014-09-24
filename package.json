@@ -4,7 +4,7 @@
   "description": "The selfies backend retrieves images from a webapp",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/lab/bin/lab -I DtoProvider"
+    "test": "./node_modules/lab/bin/lab -I DtoProvider -c"
   },
   "repository": {
     "type": "git",

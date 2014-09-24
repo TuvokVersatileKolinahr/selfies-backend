@@ -18,19 +18,19 @@ module.exports = {
       config: {
         handler: getSelfies, 
         validate: {
-          query: { name: Joi.string() }
+          query: { limit: Joi.string() }
         }
       }
     },
     {
-      method: 'GET', path: '/selfies/{num}',
+      method: 'GET', path: '/selfies/{id}',
       config: {
         handler: getSelfies
       }
     },
     {
-      method: 'GET', path: '/selfie/{id}',
-      config: { handler: getSelfie } 
+      method: 'DELETE', path: '/selfies/{id}',
+      config: { handler: delSelfie } 
     },
     {
       method: 'POST', path: '/selfies',
@@ -48,17 +48,24 @@ module.exports = {
   ]};
  
 function getSelfies(request, reply) {
-  if (request.query.name) {
-    reply(findSelfies(request.query.name));
-  }
-  else if (request.params.num) {
-    selfieProvider.findLastNum(request.params.num, function(error, items){
-      reply(items);
+  if (request.query.limit) {
+    selfieProvider.findLastNum(request.query.limit, function(error, items){
+      var retval = {};
+      retval.selfies = items;
+      reply(retval);
     });
-  }
-  else {
+  } else if (request.params.id) {
+    selfieProvider.findById(request.params.id, function(error, item){
+      console.log("item", item);
+      var retval = {};
+      retval.selfies = item;
+      reply(retval);
+    });
+  } else {
     selfieProvider.findAll(function(error, items){
-      reply(items);
+      var retval = {};
+      retval.selfies = items;
+      reply(retval);
     });
   }
 }
@@ -137,10 +144,10 @@ function addSelfieFromInstagram(request, reply) {
 }
 
 function delSelfie(request, reply) {
-  delid = request.payload.id;
-
-  selfieProvider.delete(delid, function (argument) {
-    reply([{status:'ok',selfie_id:delid}]);
-  });
-
+  console.log("deleting: ", request.params.id);
+  if (request.params.id) {
+    selfieProvider.delete(request.params.id, function (argument) {
+      reply().code(204).type('application/json');
+    });
+  }
 }
