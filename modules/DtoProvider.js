@@ -57,7 +57,7 @@ DtoProvider.prototype.findById = function(id, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error)
       else {
-        dto_collection.findOne({_id: id}, function(error, result) {
+        dto_collection.findOne({_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(error, result) {
           if( error ) callback(error)
             else callback(null, result)
           });
@@ -87,12 +87,12 @@ DtoProvider.prototype.save = function(dtos, callback) {
 };
 
 // update a dto
-DtoProvider.prototype.update = function(dtoId, dtos, callback) {
+DtoProvider.prototype.update = function(id, dtos, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error);
     else {
       dto_collection.update(
-        {_id: dtoId},
+        {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(id)},
         dtos,
         function(error, dtos) {
           if(error) callback(error);
@@ -103,12 +103,12 @@ DtoProvider.prototype.update = function(dtoId, dtos, callback) {
 };
 
 //delete dto
-DtoProvider.prototype.delete = function(dtoId, callback) {
+DtoProvider.prototype.delete = function(id, callback) {
   this.getCollection(function(error, dto_collection) {
     if(error) callback(error);
     else {
       dto_collection.remove(
-        {_id: dtoId},
+        {_id: dto_collection.db.bson_serializer.ObjectID.createFromHexString(id)},
         function(error, dto){
           if(error) callback(error);
           else callback(null, dto)

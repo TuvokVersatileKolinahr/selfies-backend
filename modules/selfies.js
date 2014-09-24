@@ -55,7 +55,7 @@ function getSelfies(request, reply) {
       reply(retval);
     });
   } else if (request.params.id) {
-    selfieProvider.findById(dto_collection.db.bson_serializer.ObjectID.createFromHexString(request.params.id), function(error, item){
+    selfieProvider.findById(request.params.id, function(error, item){
       console.log("item", item);
       var retval = {};
       retval.selfies = item;
@@ -146,7 +146,7 @@ function addSelfieFromInstagram(request, reply) {
 function delSelfie(request, reply) {
   console.log("deleting: ", request.params.id);
   if (request.params.id) {
-    selfieProvider.delete(dto_collection.db.bson_serializer.ObjectID.createFromHexString(request.params.id), function (argument) {
+    selfieProvider.delete(request.params.id, function (argument) {
       reply().code(204).type('application/json');
     });
   }
