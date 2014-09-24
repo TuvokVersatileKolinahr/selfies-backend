@@ -91,9 +91,8 @@ DtoProvider.prototype.update = function(id, dtos, callback) {
   this.getCollection(function(error, dto_collection) {
     if( error ) callback(error);
     else {
-      var newObjectId = new ObjectID.createFromHexString(id);
       dto_collection.update(
-        {_id: newObjectId},
+        {_id: id},
         dtos,
         function(error, dtos) {
           if(error) callback(error);

@@ -56,7 +56,6 @@ function getSelfies(request, reply) {
     });
   } else if (request.params.id) {
     selfieProvider.findById(request.params.id, function(error, item){
-      console.log("item", item);
       var retval = {};
       retval.selfies = item;
       reply(retval);
@@ -100,6 +99,7 @@ function addSelfie (request, reply) {
   selfieProvider.save(selfie, function (save_error, rv) {
     if (save_error) throw save_error;
     var new_selfie_id = rv[0]._id;
+
     var file_name_ext = new_selfie_id + '.png'
     var filename = config.selfies.base_dir + config.selfies.image_dir + file_name_ext;
 
@@ -144,7 +144,6 @@ function addSelfieFromInstagram(request, reply) {
 }
 
 function delSelfie(request, reply) {
-  console.log("deleting: ", request.params.id);
   if (request.params.id) {
     selfieProvider.delete(request.params.id, function (argument) {
       reply().code(204).type('application/json');
