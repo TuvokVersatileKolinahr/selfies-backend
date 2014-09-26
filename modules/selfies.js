@@ -44,6 +44,19 @@ module.exports = {
           }
         }
       }
+    },
+    {
+      method: 'PUT', path: '/selfies',
+      config: {
+        handler: updateSelfie,
+        validate: {
+          payload: {
+            name: Joi.string().min(1),
+            about: Joi.string().min(1),
+            // pic: Joi.binary().encoding('base64').required()
+          }
+        }
+      }
     }
   ]};
  
@@ -118,6 +131,20 @@ function addSelfie (request, reply) {
       });
     }
   });
+}
+
+function updateSelfie (request, reply) {
+  if (request.params.id) {
+    selfieProvider.findById(request.params.id, function(error, item){
+      if (request.payload.name) item.name = request.payload.name;
+      if (request.payload.about) item.about = request.payload.about;
+      selfieProvider.update(new_selfie_id, item, function(update_error) {
+        if (update_error) throw update_error;
+
+        reply({data:item}).code(200).type('application/json');
+      });
+    });
+  }
 }
 
 function addSelfieFromInstagram(request, reply) {
