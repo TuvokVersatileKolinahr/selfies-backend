@@ -44,7 +44,7 @@ Right now the following API endpoints are defined:
 		  ]
 		}
 
-- **GET** `/selfies/?limit=[int]` 
+- **GET** `/selfies?limit=[int]` 
 	
 	returns the number of items defined by *limit* selfies in the db sorted by last entry date. For example output see *GET /selfies*
 
