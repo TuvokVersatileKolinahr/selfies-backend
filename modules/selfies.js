@@ -46,14 +46,13 @@ module.exports = {
       }
     },
     {
-      method: 'PUT', path: '/selfies',
+      method: 'PUT', path: '/selfies/{id}',
       config: {
         handler: updateSelfie,
         validate: {
           payload: {
             name: Joi.string().min(1),
             about: Joi.string().min(1),
-            // pic: Joi.binary().encoding('base64').required()
           }
         }
       }
