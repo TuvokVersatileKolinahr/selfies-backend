@@ -16,6 +16,7 @@
     "mongoose-file": "0.0.2",
     "morgan": "~1.2.3",
     "multer": "^0.1.4",
+    "nconf": "^0.6.9",
     "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
