@@ -4,7 +4,7 @@ var Selfie = require('../models/selfie-model');
 
 router.get('/selfies', function(req, res) {
   Selfie.find({ isActive: true })
-    .sort({'creationDate': -1})
+    .sort({'uploaded': -1})
     .limit(req.query.limit)
     .exec(function(err, result) {
       res.send({selfies: result});
