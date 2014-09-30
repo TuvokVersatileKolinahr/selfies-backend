@@ -39,7 +39,7 @@ router.delete('/selfies/:id', function(req, res) {
 });
 
 router.post('/selfies', function(req, res) {
-  var picture_url = config.get('base_uri') + config.get('image_dir');
+  var picture_url = config.get('selfies:base_uri') + config.get('selfies:image_dir');
   new Selfie({about: req.body.about, name: req.body.name, picture: picture_url + req.files.pic.name}).save(function(err, selfie) {
     if (!err) {
       console.log("selfie", selfie);
