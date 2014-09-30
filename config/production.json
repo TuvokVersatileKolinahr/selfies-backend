@@ -17,5 +17,11 @@
     "config": {
       "cors": true
     }
+  },
+  "mongo": {
+    "host": "localhost",
+    "port": 27017,
+    "db": "selfieservice",
+    "collection": "selfies"
   }
 }

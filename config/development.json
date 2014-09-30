@@ -1,8 +1,8 @@
 {
   "selfies": {
-    "base_dir": "/path/to/selfies-frontend/",
-    "image_dir": "static/",
-    "base_uri": "http://selfies.example.com/",
+    "base_dir": "/Users/wouter/development/projects/tuvokkians/selfies-frontend/",
+    "image_dir": "static/uploads/",
+    "base_uri": "http://selfies.dev/",
     "instagram": {
       "client": {
         "client_id": "[my-instagram-client_id]",
@@ -17,5 +17,11 @@
     "config": {
       "cors": true
     }
+  },
+  "mongo": {
+    "host": "localhost",
+    "port": 27017,
+    "db": "selfieservice",
+    "collection": "selfies"
   }
 }

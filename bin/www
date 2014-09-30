@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var debug   = require('debug')('selfies-express'),
-    config  = require('./lib/configuration'),
+    config  = require('../lib/configuration'),
     app     = require('../app');
 
 app.set('port', config.get('server:port'));
