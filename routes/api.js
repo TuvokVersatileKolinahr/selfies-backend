@@ -1,6 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var Selfie = require('../models/selfie-model');
+var express = require('express'),
+    router  = express.Router(),
+    Selfie  = require('../models/selfie-model'),
+    config  = require('../lib/configuration');
+
 
 router.get('/selfies', function(req, res) {
   Selfie.find({ isActive: true })
@@ -37,7 +39,8 @@ router.delete('/selfies/:id', function(req, res) {
 });
 
 router.post('/selfies', function(req, res) {
-  new Selfie({about: req.body.about, name: req.body.name, picture: "http://localhost:6524/static/uploads/" + req.files.pic.name}).save(function(err, selfie) {
+  var picture_url = config.get('base_uri') + config.get('image_dir');
+  new Selfie({about: req.body.about, name: req.body.name, picture: picture_url + req.files.pic.name}).save(function(err, selfie) {
     if (!err) {
       console.log("selfie", selfie);
       res.status(200).send({selfies: selfie});
