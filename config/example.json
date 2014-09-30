@@ -1,10 +1,4 @@
 {
-  "mongo": {
-    "host": "localhost",
-    "port": 27017,
-    "db": "selfieservice",
-    "collection": "selfies"
-  },
   "selfies": {
     "base_dir": "/path/to/selfies-frontend/",
     "image_dir": "static/",
@@ -23,5 +17,11 @@
     "config": {
       "cors": true
     }
+  },
+  "mongo": {
+    "host": "localhost",
+    "port": 27017,
+    "db": "mydb",
+    "collection": "selfies"
   }
 }

@@ -24,4 +24,7 @@ build/Release
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
 
-test/static/*.png
+# We don't want to reveal our local and production settings
+config/production.json
+config/development.json
+config/test.json
