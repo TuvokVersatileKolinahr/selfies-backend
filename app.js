@@ -25,26 +25,39 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({ dest: config.get('selfies:base_dir') + config.get('selfies:image_dir')}))
 
 //Allow CORS
-if (config.get('server:config:cors')) {
-  app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-    next();
-  });
+// if (config.get('server:config:cors')) {
+//   console.log("Configuring server for CORS Methods: ", config.get('server:config:cors-allowed'));
+//   app.all('*', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     res.header('Access-Control-Allow-Methods', config.get('server:config:cors-allowed'));
+//     next();
+//   });
+// }
+
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || "*");
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with');
+  next();
+});
+
+if (app.get('env') === 'development') {
+  app.use('/api/', api);
+} else {
+  app.use('/', api);
 }
-
-app.use('/', api);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('Not Found, man, bummer ... ');
     err.status = 404;
     next(err);
 });
 
 // error handlers
-
+if (app.get('env') === 'development') {
+  console.log("Running in development mode... port: " + config.get('server:port'));
+}
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {

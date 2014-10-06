@@ -14,7 +14,9 @@ var selfieSchema= new Schema({
   about:        {type: String,  required: true},
   creationDate: {type: Date,    required: false, 'default': Date.now},
   uploaded:     {type: Date,    required: false, 'default': Date.now},
-  isActive:     {type: Boolean, required: false, 'default': true}
+  isActive:     {type: Boolean, required: false, 'default': true},
+  responses:    [{ type: Schema.Types.ObjectId, ref: 'Selfie' }],
+  responseTo:   { type: Schema.Types.ObjectId, ref: 'Selfie' }
 });
 selfieSchema.plugin(filePlugin, {
     name: "picture",
