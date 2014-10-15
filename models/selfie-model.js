@@ -15,8 +15,7 @@ var selfieSchema= new Schema({
   creationDate: {type: Date,    required: false, 'default': Date.now},
   uploaded:     {type: Date,    required: false, 'default': Date.now},
   isActive:     {type: Boolean, required: false, 'default': true},
-  responses:    [{ type: Schema.Types.ObjectId, ref: 'Selfie' }],
-  responseTo:   { type: Schema.Types.ObjectId, ref: 'Selfie' }
+  responses:    []
 });
 selfieSchema.plugin(filePlugin, {
     name: "picture",
@@ -24,7 +23,21 @@ selfieSchema.plugin(filePlugin, {
     relative_to: uploads_base
 });
 
-// selfieSchema.index({ geolocation: '2d' });
+var responseSchema= new Schema({
+  name:         {type: String,  required: true},
+  about:        {type: String,  required: true},
+  creationDate: {type: Date,    required: false, 'default': Date.now},
+  uploaded:     {type: Date,    required: false, 'default': Date.now},
+  isActive:     {type: Boolean, required: false, 'default': true},
+  responseTo:   { type: Schema.Types.ObjectId, ref: 'Selfie' }
+});
+responseSchema.plugin(filePlugin, {
+    name: "picture",
+    upload_to: make_upload_to_model(uploads, 'photos'),
+    relative_to: uploads_base
+});
+
 mongoose.set('debug', true);
 
-module.exports = mongoose.model('Selfie', selfieSchema);
+module.exports.selfie = mongoose.model('Selfie', selfieSchema);
+module.exports.response = mongoose.model('Response', responseSchema);

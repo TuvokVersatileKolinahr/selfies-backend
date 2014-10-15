@@ -31,12 +31,14 @@ Right now the following API endpoints are defined:
 		  selfies: [
 			{
 			  _id: "54259988516f4ac35167c6ba",
-			  isActive: true,
-			  name: "Hello world",
 			  about: "Lorem ipsum dolor whatever and some more",
-			  uploaded: "2014-09-26T16:51:20.767Z",
-			  created_at: "2014-09-26T16:51:20.767Z",
-			  picture: "http://selfies.example.com/static/54259988516f4ac35167c6ba.png"
+			  name: "Hello world",
+			  __v: 0,
+			  picture: "http://selfies.example.com/static/54259988516f4ac35167c6ba.png",
+			  responses: [ ],
+			  isActive: true,
+			  uploaded: "2014-10-05T16:58:03.458Z",
+			  creationDate: "2014-10-05T16:58:03.458Z"
 			},
 			{
 			  …
@@ -53,17 +55,41 @@ Right now the following API endpoints are defined:
 	returns the selfie with id *id* from the db where *id* is a positive int, and exists as id in the database. If id does not exist in the database and empt array *[ ]* is returned.
 	
 		{
-		  selfies: {
-			  _id: "54259988516f4ac35167c6ba",
-			  isActive: true,
-			  name: "Hello world",
-			  about: "Lorem ipsum dolor whatever and some more",
-			  uploaded: "2014-09-26T16:51:20.767Z",
-			  created_at: "2014-09-26T16:51:20.767Z",
-			  picture: "http://selfies.example.com/static/54259988516f4ac35167c6ba.png"
+			selfies: {
+				_id: "542c4f7f595b786925a2a08b",
+				about: "nice nice hoor",
+				name: "Nice",
+				__v: 0,
+				picture: "http://selfies.dev/static/uploads/b8874dec5f11e0a9861b348b8f9a6178.png",
+				responses: [
+					{
+						_id: "5432f6a95f642b0000878ce1",
+						about: "huhu",
+						name: "Nnnnhu",
+						responseTo: "542c4f7f595b786925a2a08b",
+						__v: 0,
+						picture: "http://selfies.dev/static/uploads/61860dad37790a763764f5ea158d951d.png",
+						isActive: true,
+						uploaded: "2014-10-06T20:08:09.018Z",
+						creationDate: "2014-10-06T20:08:09.018Z"
+					},
+					{
+						_id: "543d7020375cda120726a096",
+						about: "jaja",
+						name: "Hmmm ja",
+						responseTo: "542c4f7f595b786925a2a08b",
+						__v: 0,
+						picture: "http://selfies.dev/static/uploads/3ff8252b91dcbf81139ad922a3da6f0d.png",
+						isActive: true,
+						uploaded: "2014-10-14T18:49:04.339Z",
+						creationDate: "2014-10-14T18:49:04.339Z"
+					}
+				],
+				isActive: true,
+				uploaded: "2014-10-01T19:01:19.921Z",
+				creationDate: "2014-10-01T19:01:19.921Z"
 			}
 		}
-
 - **POST** `/selfies`
 
 	Creates a new selfie and retuns a 204, or returns an error if the following payload data (* indicates required) is not available:
@@ -78,6 +104,20 @@ Right now the following API endpoints are defined:
 
 	    name:  String > 1
 	    about: String > 1
+
+- **GET** `/responses`
+
+Retrieves all responses.
+
+- **POST** `/responses/{id}`
+
+Creates a new response to the selfie with id = `id` and retuns a 204, or returns an error if the following payload data (* indicates required) is not available:
+
+	    name:  String > 1 (*)
+	    about: String > 1 (*)
+	    pic:   Base64 encoded binary (*)
+
+
  
 ### Testing ###
 Testing the API can be done using `npm test` in the main repo directory. 
